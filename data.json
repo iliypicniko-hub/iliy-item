@@ -110,7 +110,13 @@
       "side": "lr"
     },
     {
-      "images": [],
+      "images": [
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra3_0_1780919908603.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra3_1_1780919913186.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra3_2_1780919918020.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra3_3_1780919934490.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra3_4_1780919948085.jpg"
+      ],
       "id": "p4",
       "scene": "広い壁に",
       "h": "一枚だけ、\n大きく。",
