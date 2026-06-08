@@ -7,10 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#f6f4f0;--white:#faf9f7;--ink:#252220;--mid:#7a766f;--faint:#c8c3bb;--accent:#4a6268;
-  --sans:'Zen Kaku Gothic New',sans-serif;--en:'Cormorant Garamond',Georgia,serif;
-}
+:root{--bg:#f6f4f0;--white:#faf9f7;--ink:#252220;--mid:#7a766f;--faint:#c8c3bb;--accent:#4a6268;--sans:'Zen Kaku Gothic New',sans-serif;--en:'Cormorant Garamond',Georgia,serif;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--ink);line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
@@ -18,9 +15,13 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .r.in{opacity:1;transform:translateY(0);}
 .rf{opacity:0;transition:opacity 1.4s ease;}
 .rf.in{opacity:1;}
+
+/* HEADER */
 .site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem clamp(1.8rem,7vw,5.5rem);display:flex;justify-content:space-between;align-items:center;pointer-events:none;}
 .site-header__name{font-size:.65rem;letter-spacing:.45em;color:rgba(255,255,255,.75);font-weight:300;pointer-events:auto;}
 .site-header__sub{font-size:.55rem;letter-spacing:.3em;color:rgba(255,255,255,.4);}
+
+/* OPENING */
 .opening{position:relative;height:100svh;min-height:520px;overflow:hidden;}
 .opening__bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;filter:brightness(.68) saturate(.82);transform:scale(1.04);animation:zmin 14s ease forwards;}
 @keyframes zmin{to{transform:scale(1);}}
@@ -33,69 +34,136 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .scroll-cue__bar{width:1px;height:40px;background:rgba(255,255,255,.15);overflow:hidden;position:relative;}
 .scroll-cue__bar::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:rgba(255,255,255,.6);animation:drop 2s 1.5s ease-in-out infinite;}
 @keyframes drop{0%{top:-100%;}100%{top:100%;}}
+
+/* INTRO */
 .intro{padding:clamp(5rem,12vw,10rem) clamp(1.8rem,7vw,5.5rem);max-width:480px;}
 .intro p{font-size:.78rem;letter-spacing:.1em;line-height:2.8;color:#5a5750;}
 .intro p+p{margin-top:1.8rem;}
 
-/* ── SCENE（縦横対応） ── */
+/* SCENE */
 .scene{display:grid;min-height:86vh;}
 .scene--lr{grid-template-columns:58% 1fr;}
 .scene--rl{grid-template-columns:1fr 58%;}
 .scene__photo{overflow:hidden;position:relative;background:#e8e5e0;}
-/* ★ object-fit: contain で縦横問わず全体表示 */
-.scene__photo img{
-  width:100%;height:100%;
-  object-fit:contain;
-  object-position:center;
-  display:block;
-  transition:transform .9s ease;
-  background:#e8e5e0;
-}
+.scene__photo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .9s ease;background:#e8e5e0;}
 .scene:hover .scene__photo img{transform:scale(1.025);}
 .scene__body{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,7vw,6rem) clamp(2rem,5vw,4.5rem);background:var(--white);}
 .scene__where{font-size:.58rem;letter-spacing:.4em;color:var(--faint);margin-bottom:2rem;}
 .scene__h{font-weight:300;font-size:clamp(1rem,2.2vw,1.4rem);letter-spacing:.14em;line-height:1.95;margin-bottom:1.8rem;}
-.scene__copy{font-size:.73rem;letter-spacing:.09em;line-height:2.7;color:#696460;margin-bottom:2.6rem;}
-.ptag{border:none;background:none;padding:0;cursor:pointer;text-align:left;display:inline-block;}
-.ptag__en{font-size:.58rem;letter-spacing:.3em;color:var(--accent);display:block;transition:color .2s;}
-.ptag__ja{font-size:.66rem;letter-spacing:.12em;color:var(--mid);display:block;margin-top:.18rem;}
-.ptag__bar{display:block;height:1px;width:0;background:var(--accent);margin-top:.45rem;transition:width .42s ease;}
-.ptag:hover .ptag__bar,.ptag.open .ptag__bar{width:100%;}
-.ptag:hover .ptag__en{color:var(--ink);}
-.acc{max-height:0;overflow:hidden;transition:max-height .5s ease;}
-.acc.open{max-height:300px;}
-.acc__in{margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid #e4e0da;}
-.acc-row{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #ebe8e3;font-size:.68rem;letter-spacing:.06em;}
-.acc-row:last-of-type{border-bottom:none;}
-.acc-row dt{color:var(--mid);}
-.acc-price{margin-top:1.2rem;font-size:.78rem;letter-spacing:.12em;}
-.acc-price small{font-size:.6rem;color:var(--mid);margin-left:.4rem;}
+.scene__copy{font-size:.73rem;letter-spacing:.09em;line-height:2.7;color:#696460;margin-bottom:2rem;}
 
-/* ── STRIP ── */
+/* 詳しく見るボタン */
+.detail-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:none;background:none;padding:.5rem 0;
+  cursor:pointer;color:var(--accent);
+  font-family:var(--sans);font-size:.65rem;letter-spacing:.2em;font-weight:300;
+  margin-bottom:1.8rem;
+  transition:color .2s;
+}
+.detail-btn:hover{color:var(--ink);}
+.detail-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;}
+
+/* STRIP */
 .strip{overflow:hidden;padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg);}
 .strip__track{display:flex;gap:.7rem;width:max-content;animation:drift 30s linear infinite;}
 @keyframes drift{to{transform:translateX(-50%);}}
-/* ★ stripも縦横対応: 高さ固定・幅auto・contain */
-.strip__track img{
-  height:clamp(160px,20vw,250px);
-  width:auto;
-  max-width:clamp(160px,20vw,250px);
-  object-fit:contain;
-  flex-shrink:0;
-  opacity:.9;
-  background:#e8e5e0;
-}
+.strip__track img{height:clamp(160px,20vw,250px);width:auto;max-width:clamp(160px,20vw,250px);object-fit:contain;flex-shrink:0;opacity:.9;background:#e8e5e0;}
 
+/* CLOSING */
 .closing{padding:clamp(7rem,14vw,13rem) clamp(1.8rem,7vw,5.5rem);max-width:460px;}
 .closing__quote{font-family:var(--en);font-style:italic;font-weight:300;font-size:clamp(1rem,2.3vw,1.4rem);line-height:1.85;letter-spacing:.03em;color:var(--ink);margin-bottom:2.8rem;}
 .closing__body{font-size:.72rem;letter-spacing:.1em;line-height:2.8;color:#696460;}
 footer{padding:2.5rem clamp(1.8rem,7vw,5.5rem);border-top:1px solid var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}
 footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
+
+/* ═══════════════════════════════
+   PRODUCT DETAIL MODAL
+═══════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(20,18,16,.85);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto;}
+.modal{
+  background:var(--white);
+  width:100%;max-width:860px;
+  max-height:90vh;
+  overflow-y:auto;
+  transform:translateY(20px);
+  transition:transform .35s ease;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal__gallery{
+  background:#e8e5e0;
+  position:relative;
+  min-height:400px;
+}
+.modal__main-img{
+  width:100%;height:360px;
+  object-fit:contain;object-position:center;
+  display:block;background:#e8e5e0;
+}
+.modal__thumbs{
+  display:flex;gap:.4rem;
+  padding:.6rem;
+  flex-wrap:wrap;
+  background:var(--bg);
+}
+.modal__thumb{
+  width:56px;height:56px;
+  object-fit:contain;object-position:center;
+  cursor:pointer;background:#e8e5e0;
+  border:1.5px solid transparent;
+  transition:border-color .2s;
+  flex-shrink:0;
+}
+.modal__thumb.active,.modal__thumb:hover{border-color:var(--accent);}
+.modal__info{
+  padding:2.5rem 2rem;
+  display:flex;flex-direction:column;
+  justify-content:flex-start;
+  overflow-y:auto;
+}
+.modal__close{
+  position:absolute;top:1rem;right:1rem;
+  background:rgba(255,255,255,.9);border:none;
+  width:32px;height:32px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  z-index:2;
+}
+.modal__close svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;}
+.modal__en{font-size:.6rem;letter-spacing:.35em;color:var(--accent);margin-bottom:.5rem;}
+.modal__name{font-weight:300;font-size:1.3rem;letter-spacing:.12em;margin-bottom:1.2rem;}
+.modal__copy{font-size:.75rem;letter-spacing:.09em;line-height:2.6;color:#696460;margin-bottom:2rem;}
+.modal__specs{border-top:1px solid var(--faint);padding-top:1.2rem;margin-bottom:1.8rem;}
+.modal__spec-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid #ebe8e3;font-size:.7rem;letter-spacing:.06em;}
+.modal__spec-row:last-child{border-bottom:none;}
+.modal__spec-row dt{color:var(--mid);}
+.modal__price{font-size:.88rem;letter-spacing:.12em;}
+.modal__price small{font-size:.62rem;color:var(--mid);margin-left:.4rem;}
+
+@media(max-width:640px){
+  .modal{grid-template-columns:1fr;}
+  .modal__main-img{height:260px;}
+}
+
+/* RESPONSIVE */
 @media(max-width:740px){
   .scene--lr,.scene--rl{grid-template-columns:1fr;min-height:auto;}
   .scene--rl .scene__photo{order:-1;}
   .scene__photo{height:62vw;min-height:220px;}
 }
+
+/* ═══════════════════════════════
+   EDIT BUTTON
+═══════════════════════════════ */
 .edit-btn{position:fixed;bottom:2rem;right:2rem;z-index:200;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid var(--faint);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.08);transition:background .2s,transform .2s;}
 .edit-btn:hover{background:#fff;transform:scale(1.06);}
 .edit-btn svg{width:16px;height:16px;stroke:var(--mid);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
@@ -118,6 +186,8 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .field input[type=text],.field textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--faint);background:var(--bg);font-family:var(--sans);font-size:.75rem;font-weight:300;color:var(--ink);line-height:1.7;resize:vertical;transition:border-color .2s;border-radius:2px;}
 .field input[type=text]:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{min-height:72px;}
+
+/* 画像ドロップ */
 .img-drop{position:relative;border:1.5px dashed var(--faint);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .2s,background .2s;background:var(--bg);}
 .img-drop:hover,.img-drop.drag{border-color:var(--accent);background:#f0eeea;}
 .img-drop__preview{width:100%;height:140px;object-fit:contain;object-position:center;display:block;background:#e8e5e0;}
@@ -136,7 +206,18 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .upload-bar{width:120px;height:2px;background:var(--faint);border-radius:1px;overflow:hidden;}
 .upload-bar__inner{height:100%;background:var(--accent);width:0%;transition:width .3s ease;}
 
-/* ── ストリップ編集 ── */
+/* 追加画像グリッド（モーダル用） */
+.extra-imgs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.4rem;}
+.extra-slot{position:relative;border:1.5px dashed var(--faint);border-radius:3px;overflow:hidden;cursor:pointer;aspect-ratio:1;background:var(--bg);}
+.extra-slot:hover{border-color:var(--accent);}
+.extra-slot img{width:100%;height:100%;object-fit:contain;background:#e8e5e0;display:block;}
+.extra-slot img.empty{display:none;}
+.extra-slot__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--faint);}
+.extra-slot__up{position:absolute;inset:0;background:rgba(246,244,240,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;font-size:.58rem;color:var(--accent);}
+.extra-slot__up.show{display:flex;}
+.extra-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;}
+
+/* ストリップグリッド */
 .strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.4rem;}
 .strip-slot{position:relative;border:1.5px dashed var(--faint);border-radius:3px;overflow:hidden;cursor:pointer;aspect-ratio:1;background:var(--bg);}
 .strip-slot:hover{border-color:var(--accent);}
@@ -147,11 +228,37 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .strip-slot__up{position:absolute;inset:0;background:rgba(246,244,240,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;font-size:.58rem;color:var(--accent);}
 .strip-slot__up.show{display:flex;}
 
-.product-edit-card{border:1px solid var(--faint);border-radius:2px;padding:1.2rem 1.2rem 1.4rem;margin-bottom:1.4rem;background:var(--bg);}
-.product-edit-card summary{font-size:.65rem;letter-spacing:.25em;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;}
-.product-edit-card summary::after{content:'＋';color:var(--faint);font-size:.8rem;}
-.product-edit-card[open] summary::after{content:'－';}
-.product-edit-card .inner{padding-top:1.2rem;}
+/* 商品カード（編集パネル） */
+.product-edit-card{border:1px solid var(--faint);border-radius:2px;margin-bottom:1rem;background:var(--bg);overflow:hidden;}
+.product-edit-card__head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.1rem;cursor:pointer;
+}
+.product-edit-card__head:hover{background:#efece7;}
+.product-edit-card__title{font-size:.65rem;letter-spacing:.2em;color:var(--ink);}
+.product-edit-card__toggle{font-size:.9rem;color:var(--faint);line-height:1;}
+.product-edit-card__body{display:none;padding:1.2rem;border-top:1px solid var(--faint);}
+.product-edit-card.open .product-edit-card__body{display:block;}
+.product-edit-card.open .product-edit-card__toggle{transform:rotate(45deg);}
+
+/* 商品追加・削除ボタン */
+.add-product-btn{
+  width:100%;padding:.75rem;
+  border:1.5px dashed var(--faint);background:none;
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.25em;color:var(--mid);
+  cursor:pointer;border-radius:2px;margin-bottom:1.4rem;
+  transition:border-color .2s,color .2s;
+}
+.add-product-btn:hover{border-color:var(--accent);color:var(--accent);}
+.del-product-btn{
+  width:100%;padding:.5rem;margin-top:.8rem;
+  border:1px solid #ddd;background:none;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.2em;color:#bbb;
+  cursor:pointer;border-radius:2px;
+  transition:border-color .2s,color .2s;
+}
+.del-product-btn:hover{border-color:#c0392b;color:#c0392b;}
+
 .field-sep{height:1px;background:var(--faint);margin:1.6rem 0;}
 .panel-foot{padding:1.2rem 1.8rem;border-top:1px solid var(--faint);position:sticky;bottom:0;background:var(--white);}
 .save-btn{width:100%;padding:.85rem;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:.65rem;letter-spacing:.3em;font-weight:300;transition:background .2s;border-radius:2px;}
@@ -162,21 +269,27 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 <body>
 
 <script>
+/* ═══════════════════════════════
+   SITE DATA
+═══════════════════════════════ */
 const D = {
   opening:{image:'',label:'iliy — Photo Products',sub:'撮ったあとも、その日は続く。\n形にすることで、写真は毎日の景色になる。'},
   intro:{p1:'スマートフォンの中に眠ったまま、\n見返すことのない写真たち。',p2:'形にすることで、\n写真は毎日の景色になります。'},
   closing:{quote:'無理にすすめることはしません。\nただ、選択肢として\n知っていてほしくて。',body:'撮影後、ゆっくりご検討ください。\n当日でも、後日でも。'},
   products:[
-    {id:'p1',scene:'棚の上に',h:'本の隣、\n植物のそば。',copy:'生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。',en:'Wood Frame',ja:'ウッドフレーム',specs:[['素材','オーク材 / ガラス（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥10,000',priceNote:'税込 / 仮価格',image:'',side:'lr'},
-    {id:'p2',scene:'壁に',h:'何もなかった壁が、\n語りはじめる。',copy:'存在感はあるのに、\n主張しない。\nそういう一枚が\n部屋を変えます。',en:'Matt Frame',ja:'マットフレーム',specs:[['素材','マット紙 / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥12,000',priceNote:'税込 / 仮価格',image:'',side:'rl'},
-    {id:'p3',scene:'テーブルの上に',h:'コーヒーを飲みながら、\nふと目が止まる。',copy:'木の板に直接プリント。\nフレームのないパネルは\nどこにでも置ける軽さと\n素材の温かさを持っている。',en:'Wood Panel',ja:'ウッドパネル',specs:[['素材','シナベニヤ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スティックスタンド']],price:'¥8,000',priceNote:'税込 / 仮価格',image:'',side:'lr'},
-    {id:'p4',scene:'広い壁に',h:'一枚だけ、\n大きく。',copy:'薄く、軽い。\n横長のフォーマットが\n部屋に静かな広がりをつくる。',en:'Fabric Panel',ja:'ファブリックパネル',specs:[['素材','ポリエステル / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥15,000',priceNote:'税込 / 仮価格',image:'',side:'rl'},
+    {id:'p1',scene:'棚の上に',h:'本の隣、\n植物のそば。',copy:'生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。',en:'Wood Frame',ja:'ウッドフレーム',specs:[['素材','オーク材 / ガラス（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥10,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'lr'},
+    {id:'p2',scene:'壁に',h:'何もなかった壁が、\n語りはじめる。',copy:'存在感はあるのに、\n主張しない。\nそういう一枚が\n部屋を変えます。',en:'Matt Frame',ja:'マットフレーム',specs:[['素材','マット紙 / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥12,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'rl'},
+    {id:'p3',scene:'テーブルの上に',h:'コーヒーを飲みながら、\nふと目が止まる。',copy:'木の板に直接プリント。\nフレームのないパネルは\nどこにでも置ける軽さと\n素材の温かさを持っている。',en:'Wood Panel',ja:'ウッドパネル',specs:[['素材','シナベニヤ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スティックスタンド']],price:'¥8,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'lr'},
+    {id:'p4',scene:'広い壁に',h:'一枚だけ、\n大きく。',copy:'薄く、軽い。\n横長のフォーマットが\n部屋に静かな広がりをつくる。',en:'Fabric Panel',ja:'ファブリックパネル',specs:[['素材','ポリエステル / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥15,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'rl'},
   ],
   strip:['','','','','',''],
 };
 
-function nl2br(s){return s.replace(/\n/g,'<br>');}
+function nl2br(s){return(s||'').replace(/\n/g,'<br>');}
 
+/* ═══════════════════════════════
+   RENDER
+═══════════════════════════════ */
 function render(){
   document.querySelector('.opening__bg').style.backgroundImage=D.opening.image?`url('${D.opening.image}')`:'none';
   document.querySelector('.opening__label').textContent=D.opening.label;
@@ -185,32 +298,29 @@ function render(){
   document.getElementById('intro-p2').innerHTML=nl2br(D.intro.p2);
   document.getElementById('closing-quote').innerHTML='\u201c'+nl2br(D.closing.quote)+'\u201d';
   document.getElementById('closing-body').innerHTML=nl2br(D.closing.body);
+
   const list=document.getElementById('product-list');
   list.innerHTML='';
   D.products.forEach((p,i)=>{
     const el=document.createElement('section');
     el.className=`scene scene--${p.side}`;
     el.innerHTML=`
-      <div class="scene__photo rf"><img src="${p.image}" alt="${p.ja}"></div>
+      <div class="scene__photo rf"><img src="${p.image||''}" alt="${p.ja}"></div>
       <div class="scene__body">
         <p class="scene__where r">${p.scene}</p>
         <h2 class="scene__h r">${nl2br(p.h)}</h2>
         <p class="scene__copy r">${nl2br(p.copy)}</p>
         <div class="r">
-          <button class="ptag" id="tag${i}" onclick="togAcc('acc${i}','tag${i}')">
-            <span class="ptag__en">${p.en}</span><span class="ptag__ja">${p.ja}</span><span class="ptag__bar"></span>
+          <button class="detail-btn" onclick="openModal(${i})">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            詳しく見る
           </button>
-          <div class="acc" id="acc${i}">
-            <div class="acc__in">
-              <dl>${p.specs.map(s=>`<div class="acc-row"><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}</dl>
-              <p class="acc-price">${p.price} <small>${p.priceNote}</small></p>
-            </div>
-          </div>
         </div>
       </div>`;
     if(p.side==='rl'){el.appendChild(el.querySelector('.scene__photo'));}
     list.appendChild(el);
   });
+
   const t=document.getElementById('strip-track');
   const imgs=[...D.strip,...D.strip].filter(s=>s);
   t.innerHTML=imgs.length?imgs.map(src=>`<img src="${src}" alt="">`).join(''):'';
@@ -218,6 +328,7 @@ function render(){
 }
 </script>
 
+<!-- HTML骨格 -->
 <header class="site-header">
   <span class="site-header__name">iliy</span>
   <span class="site-header__sub">Family Photo Studio</span>
@@ -239,11 +350,27 @@ function render(){
 </div>
 <footer><p>iliy — Family Photo Studio</p><p>Photo Products</p></footer>
 
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal" id="modal">
+    <div class="modal__gallery">
+      <button class="modal__close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <img class="modal__main-img" id="modal-main" src="" alt="">
+      <div class="modal__thumbs" id="modal-thumbs"></div>
+    </div>
+    <div class="modal__info" id="modal-info"></div>
+  </div>
+</div>
+
+<!-- EDIT BUTTON -->
 <button class="edit-btn" onclick="openPanel()" title="編集">
   <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
 </button>
 <div class="panel-overlay" id="overlay" onclick="closePanel()"></div>
 
+<!-- EDIT PANEL -->
 <div class="edit-panel" id="editPanel">
   <div class="panel-head">
     <h2>EDIT CONTENT</h2>
@@ -256,6 +383,7 @@ function render(){
       <button class="tab-btn active" onclick="showTab('tab-page',this)">ページ</button>
       <button class="tab-btn" onclick="showTab('tab-products',this)">商品</button>
     </div>
+    <!-- ページタブ -->
     <div class="tab-pane active" id="tab-page">
       <div class="field">
         <label>トップ画像</label>
@@ -281,18 +409,17 @@ function render(){
       <div class="field"><label>イントロ 1行目</label><textarea id="f-intro-p1" rows="2"></textarea></div>
       <div class="field"><label>イントロ 2行目</label><textarea id="f-intro-p2" rows="2"></textarea></div>
       <div class="field-sep"></div>
-
-      <!-- ★ ストリップ写真設定 -->
       <div class="field">
         <label>流れる写真（最大6枚）</label>
         <div class="strip-grid" id="strip-edit-grid"></div>
       </div>
-
       <div class="field-sep"></div>
       <div class="field"><label>クロージング 引用文</label><textarea id="f-closing-quote" rows="3"></textarea></div>
       <div class="field"><label>クロージング 本文</label><textarea id="f-closing-body" rows="2"></textarea></div>
     </div>
+    <!-- 商品タブ -->
     <div class="tab-pane" id="tab-products">
+      <button class="add-product-btn" onclick="addProduct()">＋ 商品を追加する</button>
       <div id="product-fields"></div>
     </div>
   </div>
@@ -313,6 +440,56 @@ function render(){
 </div>
 
 <script>
+/* ═══════════════════════════════
+   MODAL
+═══════════════════════════════ */
+function openModal(idx){
+  const p = D.products[idx];
+  // メイン画像 — imageがあればそれ、なければimagesの1枚目
+  const allImgs = [p.image, ...(p.images||[])].filter(s=>s);
+  const mainSrc = allImgs[0] || '';
+
+  document.getElementById('modal-main').src = mainSrc;
+
+  // サムネイル
+  const thumbs = document.getElementById('modal-thumbs');
+  thumbs.innerHTML = '';
+  allImgs.forEach((src,i)=>{
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'modal__thumb' + (i===0?' active':'');
+    img.onclick = ()=>{
+      document.getElementById('modal-main').src = src;
+      thumbs.querySelectorAll('.modal__thumb').forEach(t=>t.classList.remove('active'));
+      img.classList.add('active');
+    };
+    thumbs.appendChild(img);
+  });
+
+  // 情報
+  document.getElementById('modal-info').innerHTML = `
+    <p class="modal__en">${p.en}</p>
+    <h2 class="modal__name">${p.ja}</h2>
+    <p class="modal__copy">${nl2br(p.copy)}</p>
+    <dl class="modal__specs">
+      ${(p.specs||[]).map(s=>`<div class="modal__spec-row"><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}
+    </dl>
+    <p class="modal__price">${p.price} <small>${p.priceNote}</small></p>`;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOnBg(e){
+  if(e.target===document.getElementById('modalOverlay')) closeModal();
+}
+
+/* ═══════════════════════════════
+   GITHUB
+═══════════════════════════════ */
 function getGhConfig(){
   const user=document.getElementById('gh-user').value.trim();
   const repo=document.getElementById('gh-repo').value.trim();
@@ -321,7 +498,6 @@ function getGhConfig(){
   if(user&&repo&&token){localStorage.setItem('gh_config',JSON.stringify({user,repo,branch,token}));}
   return{user,repo,branch,token};
 }
-
 async function uploadImageToGitHub(file,key){
   const{user,repo,branch,token}=getGhConfig();
   if(!user||!repo||!token)throw new Error('GitHub設定が必要です');
@@ -334,35 +510,43 @@ async function uploadImageToGitHub(file,key){
   if(!res.ok){const e=await res.json();throw new Error(e.message||res.status);}
   return`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${filename}`;
 }
-
 function startBar(barId){const bar=document.getElementById(barId);if(!bar)return;let w=0;const iv=setInterval(()=>{w=Math.min(w+Math.random()*15,85);bar.style.width=w+'%';},200);return iv;}
 function finishBar(barId,iv){clearInterval(iv);const bar=document.getElementById(barId);if(bar)bar.style.width='100%';}
 
 async function handleImageFile(file,domKey){
   const isProduct=domKey.startsWith('product-');
+  const isExtra=domKey.startsWith('extra-');
   const isStrip=domKey.startsWith('strip-');
-  let upId,barId,prevId,phId,stripIdx;
+  let upId,barId,prevId,phId;
   if(isStrip){
-    stripIdx=parseInt(domKey.split('-')[1]);
-    upId=`sup-${stripIdx}`;barId=`sbar-${stripIdx}`;prevId=`sprev-${stripIdx}`;phId=`sph-${stripIdx}`;
-  }else if(isProduct){
+    const idx=parseInt(domKey.split('-')[1]);
+    upId=`sup-${idx}`;barId=`sbar-${idx}`;prevId=`sprev-${idx}`;phId=`sph-${idx}`;
+  } else if(isExtra){
+    const parts=domKey.split('-');const pi=parseInt(parts[1]);const ei=parseInt(parts[2]);
+    upId=`eup-${pi}-${ei}`;barId=`ebar-${pi}-${ei}`;prevId=`eprev-${pi}-${ei}`;phId=`eph-${pi}-${ei}`;
+  } else if(isProduct){
     const idx=parseInt(domKey.split('-')[1]);
     upId=`iup-p${idx}`;barId=`ibar-p${idx}`;prevId=`iprev-p${idx}`;phId=`iph-p${idx}`;
-  }else{
+  } else {
     upId='iup-opening';barId='ibar-opening';prevId='iprev-opening';phId='iph-opening';
   }
   const upEl=document.getElementById(upId);
   if(upEl)upEl.classList.add('show');
   const iv=startBar(barId);
   try{
-    const key=isStrip?`strip${stripIdx}`:isProduct?`product${domKey.split('-')[1]}`:'opening';
+    const key=isStrip?`strip${domKey.split('-')[1]}`:isExtra?`extra${domKey.split('-')[1]}_${domKey.split('-')[2]}`:isProduct?`product${domKey.split('-')[1]}`:'opening';
     const rawUrl=await uploadImageToGitHub(file,key);
     finishBar(barId,iv);
     const prev=document.getElementById(prevId);
     if(prev){prev.src=rawUrl;prev.classList.remove('empty');prev.style.display='block';}
     const ph=document.getElementById(phId);
     if(ph)ph.style.display='none';
-    if(isStrip){D.strip[stripIdx]=rawUrl;}
+    if(isStrip){D.strip[parseInt(domKey.split('-')[1])]=rawUrl;}
+    else if(isExtra){
+      const pi=parseInt(domKey.split('-')[1]);const ei=parseInt(domKey.split('-')[2]);
+      if(!D.products[pi].images)D.products[pi].images=[];
+      D.products[pi].images[ei]=rawUrl;
+    }
     else if(isProduct){D.products[parseInt(domKey.split('-')[1])].image=rawUrl;}
     else{D.opening.image=rawUrl;}
     setTimeout(()=>{if(upEl)upEl.classList.remove('show');},400);
@@ -370,15 +554,17 @@ async function handleImageFile(file,domKey){
     finishBar(barId,iv);
     if(upEl)upEl.classList.remove('show');
     setMsg('アップロード失敗: '+e.message,true);
-    if(e.message.includes('GitHub設定')){document.getElementById('gh-setup').style.display='block';toggleGhSetup();}
+    if(e.message.includes('GitHub設定')){document.getElementById('gh-setup').style.display='block';}
   }
 }
-
 function onDrag(e,el){e.preventDefault();el.classList.add('drag');}
 function offDrag(el){el.classList.remove('drag');}
 function onDropImg(e,domKey){e.preventDefault();offDrag(e.currentTarget);const file=e.dataTransfer.files[0];if(!file||!file.type.startsWith('image/'))return;handleImageFile(file,domKey);}
 function onFileImg(e,domKey){const file=e.target.files[0];if(!file)return;handleImageFile(file,domKey);}
 
+/* ═══════════════════════════════
+   PANEL
+═══════════════════════════════ */
 function togAcc(aId,tId){
   const a=document.getElementById(aId),t=document.getElementById(tId);
   const was=a.classList.contains('open');
@@ -389,6 +575,115 @@ function togAcc(aId,tId){
 function initObserver(){
   const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.08});
   document.querySelectorAll('.r,.rf').forEach(el=>{el.classList.remove('in');io.observe(el);});
+}
+
+/* 商品フィールドを1枚生成 */
+function buildProductField(p, i){
+  const d = document.createElement('div');
+  d.className = 'product-edit-card';
+  d.id = `pcard-${i}`;
+
+  const extraMax = 5;
+  let extraHtml = '';
+  for(let e=0;e<extraMax;e++){
+    const url=(p.images&&p.images[e])||'';
+    extraHtml+=`
+      <div class="extra-slot">
+        <img id="eprev-${i}-${e}" src="${url}" class="${url?'':'empty'}" alt="">
+        <div class="extra-slot__ph" id="eph-${i}-${e}" style="${url?'display:none':''}">＋</div>
+        <div class="extra-slot__up" id="eup-${i}-${e}">
+          <div class="upload-bar" style="width:60px"><div class="upload-bar__inner" id="ebar-${i}-${e}"></div></div>
+        </div>
+        <input type="file" accept="image/*" onchange="onFileImg(event,'extra-${i}-${e}')">
+      </div>`;
+  }
+
+  d.innerHTML=`
+    <div class="product-edit-card__head" onclick="togglePCard(${i})">
+      <span class="product-edit-card__title" id="pcard-title-${i}">${p.ja||'新しい商品'}</span>
+      <span class="product-edit-card__toggle">＋</span>
+    </div>
+    <div class="product-edit-card__body">
+      <div class="field">
+        <label>メイン画像</label>
+        <div class="img-drop" ondragover="onDrag(event,this)" ondragleave="offDrag(this)" ondrop="onDropImg(event,'product-${i}')">
+          <img class="img-drop__preview${p.image?'':' empty'}" id="iprev-p${i}" src="${p.image||''}" alt="">
+          <div class="img-drop__placeholder" id="iph-p${i}" style="${p.image?'display:none':''}">
+            <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--faint);fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span style="font-size:.6rem;letter-spacing:.15em;color:var(--faint)">ドロップ または クリック</span>
+          </div>
+          <div class="img-drop__overlay">
+            <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span style="font-size:.6rem;color:#fff">ドロップ または クリック</span>
+          </div>
+          <div class="img-drop__uploading" id="iup-p${i}">
+            <div class="upload-bar"><div class="upload-bar__inner" id="ibar-p${i}"></div></div>
+            <span>GitHubにアップロード中…</span>
+          </div>
+          <input type="file" accept="image/*" onchange="onFileImg(event,'product-${i}')">
+        </div>
+      </div>
+      <div class="field">
+        <label>詳細画像（最大5枚・ポップアップに表示）</label>
+        <div class="extra-imgs-grid">${extraHtml}</div>
+      </div>
+      <div class="field"><label>場所ラベル</label><input type="text" id="ps-${i}" value="${p.scene}"></div>
+      <div class="field"><label>見出し（改行は↵）</label><textarea id="ph-${i}" rows="2">${p.h}</textarea></div>
+      <div class="field"><label>説明文（改行は↵）</label><textarea id="pc-${i}" rows="3">${p.copy}</textarea></div>
+      <div class="field">
+        <label>商品名（日本語）</label>
+        <input type="text" id="pja-${i}" value="${p.ja}" oninput="document.getElementById('pcard-title-${i}').textContent=this.value||'新しい商品'">
+      </div>
+      <div class="field"><label>商品名（英語）</label><input type="text" id="pen-${i}" value="${p.en}"></div>
+      <div class="field"><label>価格</label><input type="text" id="ppr-${i}" value="${p.price}"></div>
+      <div class="field"><label>価格 補足</label><input type="text" id="ppn-${i}" value="${p.priceNote}"></div>
+      ${(p.specs||[]).map((s,j)=>`<div class="field"><label>仕様 ${j+1}（${s[0]}）</label><input type="text" id="psp-${i}-${j}" value="${s[1]}"></div>`).join('')}
+      <div class="field"><label>レイアウト</label>
+        <select id="pside-${i}" style="width:100%;padding:.6rem .8rem;border:1px solid var(--faint);background:var(--bg);font-family:var(--sans);font-size:.75rem;color:var(--ink);border-radius:2px;">
+          <option value="lr" ${p.side==='lr'?'selected':''}>写真 左・テキスト 右</option>
+          <option value="rl" ${p.side==='rl'?'selected':''}>テキスト 左・写真 右</option>
+        </select>
+      </div>
+      <button class="del-product-btn" onclick="deleteProduct(${i})">この商品を削除する</button>
+    </div>`;
+  return d;
+}
+
+function togglePCard(i){
+  const card=document.getElementById(`pcard-${i}`);
+  card.classList.toggle('open');
+  card.querySelector('.product-edit-card__toggle').textContent=card.classList.contains('open')?'－':'＋';
+}
+
+function addProduct(){
+  const newP={
+    id:'p'+Date.now(),scene:'',h:'',copy:'',en:'New Product',ja:'新しい商品',
+    specs:[['素材',''],['サイズ',''],['設置','']],
+    price:'¥0',priceNote:'税込',image:'',images:[],side:'lr'
+  };
+  D.products.push(newP);
+  const pf=document.getElementById('product-fields');
+  const idx=D.products.length-1;
+  const card=buildProductField(newP,idx);
+  pf.appendChild(card);
+  // 開いた状態で追加
+  card.classList.add('open');
+  card.querySelector('.product-edit-card__toggle').textContent='－';
+  card.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function deleteProduct(i){
+  if(!confirm(`「${D.products[i].ja}」を削除しますか？`))return;
+  D.products.splice(i,1);
+  buildProductFields();
+}
+
+function buildProductFields(){
+  const pf=document.getElementById('product-fields');
+  pf.innerHTML='';
+  D.products.forEach((p,i)=>{
+    pf.appendChild(buildProductField(p,i));
+  });
 }
 
 function buildStripGrid(){
@@ -427,45 +722,8 @@ function openPanel(){
   else{prev.src='';prev.classList.add('empty');if(ph)ph.style.display='';}
 
   buildStripGrid();
+  buildProductFields();
 
-  const pf=document.getElementById('product-fields');
-  pf.innerHTML='';
-  D.products.forEach((p,i)=>{
-    const d=document.createElement('details');
-    d.className='product-edit-card';
-    d.innerHTML=`
-      <summary>${p.ja}</summary>
-      <div class="inner">
-        <div class="field">
-          <label>商品画像</label>
-          <div class="img-drop" ondragover="onDrag(event,this)" ondragleave="offDrag(this)" ondrop="onDropImg(event,'product-${i}')">
-            <img class="img-drop__preview${p.image?'':' empty'}" id="iprev-p${i}" src="${p.image||''}" alt="">
-            <div class="img-drop__placeholder" id="iph-p${i}" style="${p.image?'display:none':''}">
-              <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--faint);fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <span style="font-size:.6rem;letter-spacing:.15em;color:var(--faint)">ドロップ または クリック</span>
-            </div>
-            <div class="img-drop__overlay">
-              <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <span style="font-size:.6rem;letter-spacing:.15em;color:#fff">ドロップ または クリック</span>
-            </div>
-            <div class="img-drop__uploading" id="iup-p${i}">
-              <div class="upload-bar"><div class="upload-bar__inner" id="ibar-p${i}"></div></div>
-              <span>GitHubにアップロード中…</span>
-            </div>
-            <input type="file" accept="image/*" onchange="onFileImg(event,'product-${i}')">
-          </div>
-        </div>
-        <div class="field"><label>場所ラベル</label><input type="text" id="ps-${i}" value="${p.scene}"></div>
-        <div class="field"><label>見出し（改行は↵）</label><textarea id="ph-${i}" rows="2">${p.h}</textarea></div>
-        <div class="field"><label>説明文（改行は↵）</label><textarea id="pc-${i}" rows="3">${p.copy}</textarea></div>
-        <div class="field"><label>商品名（英語）</label><input type="text" id="pen-${i}" value="${p.en}"></div>
-        <div class="field"><label>商品名（日本語）</label><input type="text" id="pja-${i}" value="${p.ja}"></div>
-        <div class="field"><label>価格</label><input type="text" id="ppr-${i}" value="${p.price}"></div>
-        <div class="field"><label>価格 補足</label><input type="text" id="ppn-${i}" value="${p.priceNote}"></div>
-        ${p.specs.map((s,j)=>`<div class="field"><label>仕様 ${j+1}（${s[0]}）</label><input type="text" id="psp-${i}-${j}" value="${s[1]}"></div>`).join('')}
-      </div>`;
-    pf.appendChild(d);
-  });
   document.getElementById('overlay').classList.add('open');
   document.getElementById('editPanel').classList.add('open');
 }
@@ -489,6 +747,7 @@ function toggleGhSetup(){
   if(saved.token)document.getElementById('gh-token').value=saved.token;
 }
 function setMsg(text,isError=false){const el=document.getElementById('save-msg');el.textContent=text;el.style.color=isError?'#c0392b':'var(--mid)';}
+
 function collectFormValues(){
   D.opening.sub=document.getElementById('f-opening-sub').value;
   D.intro.p1=document.getElementById('f-intro-p1').value;
@@ -496,6 +755,7 @@ function collectFormValues(){
   D.closing.quote=document.getElementById('f-closing-quote').value;
   D.closing.body=document.getElementById('f-closing-body').value;
   D.products.forEach((p,i)=>{
+    if(!document.getElementById(`ps-${i}`))return;
     p.scene=document.getElementById(`ps-${i}`).value;
     p.h=document.getElementById(`ph-${i}`).value;
     p.copy=document.getElementById(`pc-${i}`).value;
@@ -503,9 +763,14 @@ function collectFormValues(){
     p.ja=document.getElementById(`pja-${i}`).value;
     p.price=document.getElementById(`ppr-${i}`).value;
     p.priceNote=document.getElementById(`ppn-${i}`).value;
-    p.specs.forEach((s,j)=>{s[1]=document.getElementById(`psp-${i}-${j}`).value;});
+    p.side=document.getElementById(`pside-${i}`).value;
+    p.specs.forEach((s,j)=>{
+      const el=document.getElementById(`psp-${i}-${j}`);
+      if(el)s[1]=el.value;
+    });
   });
 }
+
 async function saveToGitHub(){
   collectFormValues();
   const{user,repo,branch,token}=getGhConfig();
@@ -528,7 +793,9 @@ async function saveToGitHub(){
   }catch(e){setMsg('通信エラー: '+e.message,true);}
   finally{btn.textContent='GitHubに保存';btn.disabled=false;}
 }
+
 function saveAll(){collectFormValues();render();closePanel();}
+
 async function init(){
   const saved=JSON.parse(localStorage.getItem('gh_config')||'{}');
   try{
@@ -538,7 +805,7 @@ async function init(){
       Object.assign(D.opening,s.opening||{});
       Object.assign(D.intro,s.intro||{});
       Object.assign(D.closing,s.closing||{});
-      if(s.products)D.products=s.products;
+      if(s.products)D.products=s.products.map(p=>({images:[],...p}));
       if(s.strip)D.strip=s.strip;
     }
   }catch(e){}
