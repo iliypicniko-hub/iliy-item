@@ -78,7 +78,12 @@
       "side": "rl"
     },
     {
-      "images": [],
+      "images": [
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra2_0_1780919832008.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra2_1_1780919838223.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra2_2_1780919841841.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra2_3_1780919860571.jpg"
+      ],
       "id": "p3",
       "scene": "テーブルの上に",
       "h": "コーヒーを飲みながら、\nふと目が止まる。",
