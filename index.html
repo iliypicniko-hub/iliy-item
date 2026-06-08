@@ -22,7 +22,7 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .site-header__name{font-size:.65rem;letter-spacing:.45em;color:rgba(255,255,255,.75);font-weight:300;pointer-events:auto;}
 .site-header__sub{font-size:.55rem;letter-spacing:.3em;color:rgba(255,255,255,.4);}
 .opening{position:relative;height:100svh;min-height:520px;overflow:hidden;}
-.opening__bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;background-repeat:no-repeat;filter:brightness(.68) saturate(.82);transform:scale(1.04);animation:zmin 14s ease forwards;}
+.opening__bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;filter:brightness(.68) saturate(.82);transform:scale(1.04);animation:zmin 14s ease forwards;}
 @keyframes zmin{to{transform:scale(1);}}
 .opening__text{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(1.8rem,7vw,5.5rem) clamp(4rem,10vh,7rem);}
 .opening__label{font-size:.6rem;letter-spacing:.4em;color:rgba(255,255,255,.4);margin-bottom:1.2rem;opacity:0;animation:fin .8s .6s ease forwards;}
@@ -36,11 +36,21 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .intro{padding:clamp(5rem,12vw,10rem) clamp(1.8rem,7vw,5.5rem);max-width:480px;}
 .intro p{font-size:.78rem;letter-spacing:.1em;line-height:2.8;color:#5a5750;}
 .intro p+p{margin-top:1.8rem;}
+
+/* ── SCENE（縦横対応） ── */
 .scene{display:grid;min-height:86vh;}
 .scene--lr{grid-template-columns:58% 1fr;}
 .scene--rl{grid-template-columns:1fr 58%;}
-.scene__photo{overflow:hidden;position:relative;}
-.scene__photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s ease;}
+.scene__photo{overflow:hidden;position:relative;background:#e8e5e0;}
+/* ★ object-fit: contain で縦横問わず全体表示 */
+.scene__photo img{
+  width:100%;height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  transition:transform .9s ease;
+  background:#e8e5e0;
+}
 .scene:hover .scene__photo img{transform:scale(1.025);}
 .scene__body{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,7vw,6rem) clamp(2rem,5vw,4.5rem);background:var(--white);}
 .scene__where{font-size:.58rem;letter-spacing:.4em;color:var(--faint);margin-bottom:2rem;}
@@ -60,10 +70,22 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .acc-row dt{color:var(--mid);}
 .acc-price{margin-top:1.2rem;font-size:.78rem;letter-spacing:.12em;}
 .acc-price small{font-size:.6rem;color:var(--mid);margin-left:.4rem;}
+
+/* ── STRIP ── */
 .strip{overflow:hidden;padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg);}
 .strip__track{display:flex;gap:.7rem;width:max-content;animation:drift 30s linear infinite;}
 @keyframes drift{to{transform:translateX(-50%);}}
-.strip__track img{height:clamp(160px,20vw,250px);width:auto;object-fit:cover;flex-shrink:0;opacity:.9;}
+/* ★ stripも縦横対応: 高さ固定・幅auto・contain */
+.strip__track img{
+  height:clamp(160px,20vw,250px);
+  width:auto;
+  max-width:clamp(160px,20vw,250px);
+  object-fit:contain;
+  flex-shrink:0;
+  opacity:.9;
+  background:#e8e5e0;
+}
+
 .closing{padding:clamp(7rem,14vw,13rem) clamp(1.8rem,7vw,5.5rem);max-width:460px;}
 .closing__quote{font-family:var(--en);font-style:italic;font-weight:300;font-size:clamp(1rem,2.3vw,1.4rem);line-height:1.85;letter-spacing:.03em;color:var(--ink);margin-bottom:2.8rem;}
 .closing__body{font-size:.72rem;letter-spacing:.1em;line-height:2.8;color:#696460;}
@@ -96,11 +118,9 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .field input[type=text],.field textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--faint);background:var(--bg);font-family:var(--sans);font-size:.75rem;font-weight:300;color:var(--ink);line-height:1.7;resize:vertical;transition:border-color .2s;border-radius:2px;}
 .field input[type=text]:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{min-height:72px;}
-
-/* ════ 画像ドロップゾーン ════ */
 .img-drop{position:relative;border:1.5px dashed var(--faint);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .2s,background .2s;background:var(--bg);}
 .img-drop:hover,.img-drop.drag{border-color:var(--accent);background:#f0eeea;}
-.img-drop__preview{width:100%;height:140px;object-fit:cover;display:block;}
+.img-drop__preview{width:100%;height:140px;object-fit:contain;object-position:center;display:block;background:#e8e5e0;}
 .img-drop__preview.empty{display:none;}
 .img-drop__placeholder{height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;pointer-events:none;}
 .img-drop__placeholder svg{width:22px;height:22px;stroke:var(--faint);fill:none;stroke-width:1.5;}
@@ -115,6 +135,17 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .img-drop__uploading span{font-size:.6rem;letter-spacing:.15em;color:var(--accent);}
 .upload-bar{width:120px;height:2px;background:var(--faint);border-radius:1px;overflow:hidden;}
 .upload-bar__inner{height:100%;background:var(--accent);width:0%;transition:width .3s ease;}
+
+/* ── ストリップ編集 ── */
+.strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.4rem;}
+.strip-slot{position:relative;border:1.5px dashed var(--faint);border-radius:3px;overflow:hidden;cursor:pointer;aspect-ratio:1;background:var(--bg);}
+.strip-slot:hover{border-color:var(--accent);}
+.strip-slot img{width:100%;height:100%;object-fit:contain;background:#e8e5e0;display:block;}
+.strip-slot img.empty{display:none;}
+.strip-slot__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:.1em;color:var(--faint);}
+.strip-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;}
+.strip-slot__up{position:absolute;inset:0;background:rgba(246,244,240,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;font-size:.58rem;color:var(--accent);}
+.strip-slot__up.show{display:flex;}
 
 .product-edit-card{border:1px solid var(--faint);border-radius:2px;padding:1.2rem 1.2rem 1.4rem;margin-bottom:1.4rem;background:var(--bg);}
 .product-edit-card summary{font-size:.65rem;letter-spacing:.25em;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;}
@@ -182,7 +213,7 @@ function render(){
   });
   const t=document.getElementById('strip-track');
   const imgs=[...D.strip,...D.strip].filter(s=>s);
-  t.innerHTML=imgs.map(src=>`<img src="${src}" alt="">`).join('');
+  t.innerHTML=imgs.length?imgs.map(src=>`<img src="${src}" alt="">`).join(''):'';
   initObserver();
 }
 </script>
@@ -250,6 +281,14 @@ function render(){
       <div class="field"><label>イントロ 1行目</label><textarea id="f-intro-p1" rows="2"></textarea></div>
       <div class="field"><label>イントロ 2行目</label><textarea id="f-intro-p2" rows="2"></textarea></div>
       <div class="field-sep"></div>
+
+      <!-- ★ ストリップ写真設定 -->
+      <div class="field">
+        <label>流れる写真（最大6枚）</label>
+        <div class="strip-grid" id="strip-edit-grid"></div>
+      </div>
+
+      <div class="field-sep"></div>
       <div class="field"><label>クロージング 引用文</label><textarea id="f-closing-quote" rows="3"></textarea></div>
       <div class="field"><label>クロージング 本文</label><textarea id="f-closing-body" rows="2"></textarea></div>
     </div>
@@ -274,116 +313,72 @@ function render(){
 </div>
 
 <script>
-/* ── GitHub設定取得 ── */
 function getGhConfig(){
-  const user  =document.getElementById('gh-user').value.trim();
-  const repo  =document.getElementById('gh-repo').value.trim();
+  const user=document.getElementById('gh-user').value.trim();
+  const repo=document.getElementById('gh-repo').value.trim();
   const branch=document.getElementById('gh-branch').value.trim()||'main';
-  const token =document.getElementById('gh-token').value.trim();
+  const token=document.getElementById('gh-token').value.trim();
   if(user&&repo&&token){localStorage.setItem('gh_config',JSON.stringify({user,repo,branch,token}));}
   return{user,repo,branch,token};
 }
 
-/* ── 画像をGitHubにアップロードしてRaw URLを返す ── */
-async function uploadImageToGitHub(file, key){
-  const {user,repo,branch,token}=getGhConfig();
-  if(!user||!repo||!token) throw new Error('GitHub設定が必要です');
-
-  // ファイルをbase64に変換
-  const b64 = await new Promise((res,rej)=>{
-    const r=new FileReader();
-    r.onload=()=>res(r.result.split(',')[1]);
-    r.onerror=rej;
-    r.readAsDataURL(file);
-  });
-
-  // ファイル名をユニークに（タイムスタンプ付き）
-  const ext = file.name.split('.').pop().toLowerCase();
-  const filename = `images/${key}_${Date.now()}.${ext}`;
-  const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${filename}`;
+async function uploadImageToGitHub(file,key){
+  const{user,repo,branch,token}=getGhConfig();
+  if(!user||!repo||!token)throw new Error('GitHub設定が必要です');
+  const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
+  const ext=file.name.split('.').pop().toLowerCase()||'jpg';
+  const filename=`images/${key}_${Date.now()}.${ext}`;
+  const apiUrl=`https://api.github.com/repos/${user}/${repo}/contents/${filename}`;
   const headers={'Authorization':`Bearer ${token}`,'Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
-
-  const res = await fetch(apiUrl,{
-    method:'PUT',
-    headers,
-    body:JSON.stringify({message:`upload image: ${filename}`,content:b64,branch})
-  });
+  const res=await fetch(apiUrl,{method:'PUT',headers,body:JSON.stringify({message:`upload: ${filename}`,content:b64,branch})});
   if(!res.ok){const e=await res.json();throw new Error(e.message||res.status);}
-
-  return `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${filename}`;
+  return`https://raw.githubusercontent.com/${user}/${repo}/${branch}/${filename}`;
 }
 
-/* ── 進捗バーアニメ ── */
-function startBar(barId){
-  const bar=document.getElementById(barId);
-  if(!bar)return;
-  let w=0;
-  const iv=setInterval(()=>{w=Math.min(w+Math.random()*15,85);bar.style.width=w+'%';},200);
-  return iv;
-}
-function finishBar(barId,iv){
-  clearInterval(iv);
-  const bar=document.getElementById(barId);
-  if(bar){bar.style.width='100%';}
-}
+function startBar(barId){const bar=document.getElementById(barId);if(!bar)return;let w=0;const iv=setInterval(()=>{w=Math.min(w+Math.random()*15,85);bar.style.width=w+'%';},200);return iv;}
+function finishBar(barId,iv){clearInterval(iv);const bar=document.getElementById(barId);if(bar)bar.style.width='100%';}
 
-/* ── ドロップ/ファイル選択の共通処理 ── */
-async function handleImageFile(file, domKey){
-  // domKey例: 'opening-img' or 'product-0'
-  const isProduct = domKey.startsWith('product-');
-  const idx = isProduct ? parseInt(domKey.split('-')[1]) : null;
-  const upId = isProduct ? `iup-p${idx}` : `iup-opening`;
-  const barId = isProduct ? `ibar-p${idx}` : `ibar-opening`;
-  const prevId = isProduct ? `iprev-p${idx}` : `iprev-opening`;
-  const phId = isProduct ? `iph-p${idx}` : `iph-opening`;
-
-  // アップロード中UI表示
+async function handleImageFile(file,domKey){
+  const isProduct=domKey.startsWith('product-');
+  const isStrip=domKey.startsWith('strip-');
+  let upId,barId,prevId,phId,stripIdx;
+  if(isStrip){
+    stripIdx=parseInt(domKey.split('-')[1]);
+    upId=`sup-${stripIdx}`;barId=`sbar-${stripIdx}`;prevId=`sprev-${stripIdx}`;phId=`sph-${stripIdx}`;
+  }else if(isProduct){
+    const idx=parseInt(domKey.split('-')[1]);
+    upId=`iup-p${idx}`;barId=`ibar-p${idx}`;prevId=`iprev-p${idx}`;phId=`iph-p${idx}`;
+  }else{
+    upId='iup-opening';barId='ibar-opening';prevId='iprev-opening';phId='iph-opening';
+  }
   const upEl=document.getElementById(upId);
-  if(upEl) upEl.classList.add('show');
+  if(upEl)upEl.classList.add('show');
   const iv=startBar(barId);
-
   try{
-    const rawUrl = await uploadImageToGitHub(file, isProduct?`product${idx}`:'opening');
+    const key=isStrip?`strip${stripIdx}`:isProduct?`product${domKey.split('-')[1]}`:'opening';
+    const rawUrl=await uploadImageToGitHub(file,key);
     finishBar(barId,iv);
-
-    // プレビュー更新
     const prev=document.getElementById(prevId);
-    if(prev){prev.src=rawUrl;prev.classList.remove('empty');}
+    if(prev){prev.src=rawUrl;prev.classList.remove('empty');prev.style.display='block';}
     const ph=document.getElementById(phId);
-    if(ph) ph.style.display='none';
-
-    // Dに保存
-    if(isProduct){ D.products[idx].image=rawUrl; }
-    else { D.opening.image=rawUrl; }
-
+    if(ph)ph.style.display='none';
+    if(isStrip){D.strip[stripIdx]=rawUrl;}
+    else if(isProduct){D.products[parseInt(domKey.split('-')[1])].image=rawUrl;}
+    else{D.opening.image=rawUrl;}
     setTimeout(()=>{if(upEl)upEl.classList.remove('show');},400);
   }catch(e){
     finishBar(barId,iv);
     if(upEl)upEl.classList.remove('show');
-    setMsg('画像アップロード失敗: '+e.message, true);
-    // GitHub設定が未入力なら設定欄を開く
-    if(e.message.includes('GitHub設定')){
-      document.getElementById('gh-setup').style.display='block';
-      toggleGhSetup();
-    }
+    setMsg('アップロード失敗: '+e.message,true);
+    if(e.message.includes('GitHub設定')){document.getElementById('gh-setup').style.display='block';toggleGhSetup();}
   }
 }
 
 function onDrag(e,el){e.preventDefault();el.classList.add('drag');}
 function offDrag(el){el.classList.remove('drag');}
-function onDropImg(e, domKey){
-  e.preventDefault();offDrag(e.currentTarget);
-  const file=e.dataTransfer.files[0];
-  if(!file||!file.type.startsWith('image/'))return;
-  handleImageFile(file,domKey);
-}
-function onFileImg(e, domKey){
-  const file=e.target.files[0];
-  if(!file)return;
-  handleImageFile(file,domKey);
-}
+function onDropImg(e,domKey){e.preventDefault();offDrag(e.currentTarget);const file=e.dataTransfer.files[0];if(!file||!file.type.startsWith('image/'))return;handleImageFile(file,domKey);}
+function onFileImg(e,domKey){const file=e.target.files[0];if(!file)return;handleImageFile(file,domKey);}
 
-/* ── アコーディオン ── */
 function togAcc(aId,tId){
   const a=document.getElementById(aId),t=document.getElementById(tId);
   const was=a.classList.contains('open');
@@ -396,18 +391,42 @@ function initObserver(){
   document.querySelectorAll('.r,.rf').forEach(el=>{el.classList.remove('in');io.observe(el);});
 }
 
-/* ── パネル開閉 ── */
-function openPanel(){
-  document.getElementById('f-opening-sub').value  =D.opening.sub;
-  document.getElementById('f-intro-p1').value     =D.intro.p1;
-  document.getElementById('f-intro-p2').value     =D.intro.p2;
-  document.getElementById('f-closing-quote').value=D.closing.quote;
-  document.getElementById('f-closing-body').value =D.closing.body;
+function buildStripGrid(){
+  const grid=document.getElementById('strip-edit-grid');
+  grid.innerHTML='';
+  for(let i=0;i<6;i++){
+    const url=D.strip[i]||'';
+    const slot=document.createElement('div');
+    slot.className='strip-slot';
+    slot.innerHTML=`
+      <img id="sprev-${i}" src="${url}" class="${url?'':'empty'}" alt="">
+      <div class="strip-slot__ph" id="sph-${i}" style="${url?'display:none':''}">＋</div>
+      <div class="strip-slot__up" id="sup-${i}">
+        <div class="upload-bar" style="width:80px"><div class="upload-bar__inner" id="sbar-${i}"></div></div>
+      </div>
+      <input type="file" accept="image/*" onchange="onFileImg(event,'strip-${i}')">`;
+    grid.appendChild(slot);
+  }
+}
 
+function openPanel(){
+  const saved=JSON.parse(localStorage.getItem('gh_config')||'{}');
+  if(saved.user)document.getElementById('gh-user').value=saved.user;
+  if(saved.repo)document.getElementById('gh-repo').value=saved.repo;
+  if(saved.branch)document.getElementById('gh-branch').value=saved.branch;
+  if(saved.token)document.getElementById('gh-token').value=saved.token;
+
+  document.getElementById('f-opening-sub').value=D.opening.sub;
+  document.getElementById('f-intro-p1').value=D.intro.p1;
+  document.getElementById('f-intro-p2').value=D.intro.p2;
+  document.getElementById('f-closing-quote').value=D.closing.quote;
+  document.getElementById('f-closing-body').value=D.closing.body;
   const prev=document.getElementById('iprev-opening');
   const ph=document.getElementById('iph-opening');
   if(D.opening.image){prev.src=D.opening.image;prev.classList.remove('empty');if(ph)ph.style.display='none';}
   else{prev.src='';prev.classList.add('empty');if(ph)ph.style.display='';}
+
+  buildStripGrid();
 
   const pf=document.getElementById('product-fields');
   pf.innerHTML='';
@@ -419,7 +438,7 @@ function openPanel(){
       <div class="inner">
         <div class="field">
           <label>商品画像</label>
-          <div class="img-drop" id="idrop-p${i}" ondragover="onDrag(event,this)" ondragleave="offDrag(this)" ondrop="onDropImg(event,'product-${i}')">
+          <div class="img-drop" ondragover="onDrag(event,this)" ondragleave="offDrag(this)" ondrop="onDropImg(event,'product-${i}')">
             <img class="img-drop__preview${p.image?'':' empty'}" id="iprev-p${i}" src="${p.image||''}" alt="">
             <div class="img-drop__placeholder" id="iph-p${i}" style="${p.image?'display:none':''}">
               <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--faint);fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -427,7 +446,7 @@ function openPanel(){
             </div>
             <div class="img-drop__overlay">
               <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <span style="font-size:.6rem;letter-spacing:.15em;color:#fff">ここに写真をドロップ</span>
+              <span style="font-size:.6rem;letter-spacing:.15em;color:#fff">ドロップ または クリック</span>
             </div>
             <div class="img-drop__uploading" id="iup-p${i}">
               <div class="upload-bar"><div class="upload-bar__inner" id="ibar-p${i}"></div></div>
@@ -447,7 +466,6 @@ function openPanel(){
       </div>`;
     pf.appendChild(d);
   });
-
   document.getElementById('overlay').classList.add('open');
   document.getElementById('editPanel').classList.add('open');
 }
@@ -465,29 +483,25 @@ function toggleGhSetup(){
   const el=document.getElementById('gh-setup');
   el.style.display=el.style.display==='none'?'block':'none';
   const saved=JSON.parse(localStorage.getItem('gh_config')||'{}');
-  if(saved.user)  document.getElementById('gh-user').value  =saved.user;
-  if(saved.repo)  document.getElementById('gh-repo').value  =saved.repo;
+  if(saved.user)document.getElementById('gh-user').value=saved.user;
+  if(saved.repo)document.getElementById('gh-repo').value=saved.repo;
   if(saved.branch)document.getElementById('gh-branch').value=saved.branch;
-  if(saved.token) document.getElementById('gh-token').value =saved.token;
+  if(saved.token)document.getElementById('gh-token').value=saved.token;
 }
-function setMsg(text,isError=false){
-  const el=document.getElementById('save-msg');
-  el.textContent=text;
-  el.style.color=isError?'#c0392b':'var(--mid)';
-}
+function setMsg(text,isError=false){const el=document.getElementById('save-msg');el.textContent=text;el.style.color=isError?'#c0392b':'var(--mid)';}
 function collectFormValues(){
-  D.opening.sub      =document.getElementById('f-opening-sub').value;
-  D.intro.p1         =document.getElementById('f-intro-p1').value;
-  D.intro.p2         =document.getElementById('f-intro-p2').value;
-  D.closing.quote    =document.getElementById('f-closing-quote').value;
-  D.closing.body     =document.getElementById('f-closing-body').value;
+  D.opening.sub=document.getElementById('f-opening-sub').value;
+  D.intro.p1=document.getElementById('f-intro-p1').value;
+  D.intro.p2=document.getElementById('f-intro-p2').value;
+  D.closing.quote=document.getElementById('f-closing-quote').value;
+  D.closing.body=document.getElementById('f-closing-body').value;
   D.products.forEach((p,i)=>{
-    p.scene    =document.getElementById(`ps-${i}`).value;
-    p.h        =document.getElementById(`ph-${i}`).value;
-    p.copy     =document.getElementById(`pc-${i}`).value;
-    p.en       =document.getElementById(`pen-${i}`).value;
-    p.ja       =document.getElementById(`pja-${i}`).value;
-    p.price    =document.getElementById(`ppr-${i}`).value;
+    p.scene=document.getElementById(`ps-${i}`).value;
+    p.h=document.getElementById(`ph-${i}`).value;
+    p.copy=document.getElementById(`pc-${i}`).value;
+    p.en=document.getElementById(`pen-${i}`).value;
+    p.ja=document.getElementById(`pja-${i}`).value;
+    p.price=document.getElementById(`ppr-${i}`).value;
     p.priceNote=document.getElementById(`ppn-${i}`).value;
     p.specs.forEach((s,j)=>{s[1]=document.getElementById(`psp-${i}-${j}`).value;});
   });
@@ -516,15 +530,16 @@ async function saveToGitHub(){
 }
 function saveAll(){collectFormValues();render();closePanel();}
 async function init(){
+  const saved=JSON.parse(localStorage.getItem('gh_config')||'{}');
   try{
     const res=await fetch('data.json?t='+Date.now());
     if(res.ok){
-      const saved=await res.json();
-      Object.assign(D.opening,saved.opening||{});
-      Object.assign(D.intro,  saved.intro  ||{});
-      Object.assign(D.closing,saved.closing||{});
-      if(saved.products)D.products=saved.products;
-      if(saved.strip)   D.strip   =saved.strip;
+      const s=await res.json();
+      Object.assign(D.opening,s.opening||{});
+      Object.assign(D.intro,s.intro||{});
+      Object.assign(D.closing,s.closing||{});
+      if(s.products)D.products=s.products;
+      if(s.strip)D.strip=s.strip;
     }
   }catch(e){}
   render();
