@@ -199,7 +199,9 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .img-drop:hover .img-drop__overlay,.img-drop.drag .img-drop__overlay{opacity:1;}
 .img-drop__overlay svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.5;}
 .img-drop__overlay span{font-size:.6rem;letter-spacing:.15em;color:#fff;}
-.img-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;}
+.img-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;z-index:1;}
+.img-drop .slot-del{display:none;z-index:3;}
+.img-drop:hover .slot-del{display:flex;}
 .img-drop__uploading{position:absolute;inset:0;background:rgba(246,244,240,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;}
 .img-drop__uploading.show{display:flex;}
 .img-drop__uploading span{font-size:.6rem;letter-spacing:.15em;color:var(--accent);}
@@ -216,6 +218,17 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .extra-slot__up{position:absolute;inset:0;background:rgba(246,244,240,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;font-size:.58rem;color:var(--accent);}
 .extra-slot__up.show{display:flex;}
 .extra-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;}
+.slot-del{
+  position:absolute;top:3px;right:3px;
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(37,34,32,.6);border:none;
+  cursor:pointer;display:none;
+  align-items:center;justify-content:center;z-index:2;
+}
+.slot-del svg{width:9px;height:9px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;}
+.extra-slot:hover .slot-del,
+.strip-slot:hover .slot-del{display:flex;}
+.slot-del:hover{background:rgba(192,57,43,.85);}
 
 /* ストリップグリッド */
 .strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.4rem;}
@@ -224,7 +237,7 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .strip-slot img{width:100%;height:100%;object-fit:contain;background:#e8e5e0;display:block;}
 .strip-slot img.empty{display:none;}
 .strip-slot__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:.1em;color:var(--faint);}
-.strip-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;}
+.strip-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;z-index:1;}
 .strip-slot__up{position:absolute;inset:0;background:rgba(246,244,240,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;font-size:.58rem;color:var(--accent);}
 .strip-slot__up.show{display:flex;}
 
@@ -401,6 +414,9 @@ function render(){
             <div class="upload-bar"><div class="upload-bar__inner" id="ibar-opening"></div></div>
             <span>GitHubにアップロード中…</span>
           </div>
+          <button class="slot-del" onclick="clearOpeningImg(event)" title="削除">
+            <svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+          </button>
           <input type="file" accept="image/*" onchange="onFileImg(event,'opening-img')">
         </div>
       </div>
@@ -594,6 +610,9 @@ function buildProductField(p, i){
         <div class="extra-slot__up" id="eup-${i}-${e}">
           <div class="upload-bar" style="width:60px"><div class="upload-bar__inner" id="ebar-${i}-${e}"></div></div>
         </div>
+        <button class="slot-del" onclick="clearExtraImg(${i},${e},event)" title="削除">
+          <svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+        </button>
         <input type="file" accept="image/*" onchange="onFileImg(event,'extra-${i}-${e}')">
       </div>`;
   }
@@ -620,6 +639,9 @@ function buildProductField(p, i){
             <div class="upload-bar"><div class="upload-bar__inner" id="ibar-p${i}"></div></div>
             <span>GitHubにアップロード中…</span>
           </div>
+          <button class="slot-del" onclick="clearProductImg(${i},event)" title="削除">
+            <svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+          </button>
           <input type="file" accept="image/*" onchange="onFileImg(event,'product-${i}')">
         </div>
       </div>
@@ -792,6 +814,43 @@ async function saveToGitHub(){
     else{const err=await putRes.json();setMsg('エラー: '+(err.message||putRes.status),true);}
   }catch(e){setMsg('通信エラー: '+e.message,true);}
   finally{btn.textContent='GitHubに保存';btn.disabled=false;}
+}
+
+/* ═══════════════════════════════
+   IMAGE CLEAR FUNCTIONS
+═══════════════════════════════ */
+function clearExtraImg(pi, ei, e){
+  e.stopPropagation(); e.preventDefault();
+  if(!D.products[pi].images) D.products[pi].images = [];
+  D.products[pi].images[ei] = '';
+  const prev = document.getElementById(`eprev-${pi}-${ei}`);
+  const ph   = document.getElementById(`eph-${pi}-${ei}`);
+  if(prev){ prev.src=''; prev.classList.add('empty'); prev.style.display='none'; }
+  if(ph)   ph.style.display = '';
+}
+function clearStripImg(i, e){
+  e.stopPropagation(); e.preventDefault();
+  D.strip[i] = '';
+  const prev = document.getElementById(`sprev-${i}`);
+  const ph   = document.getElementById(`sph-${i}`);
+  if(prev){ prev.src=''; prev.classList.add('empty'); prev.style.display='none'; }
+  if(ph)   ph.style.display = '';
+}
+function clearProductImg(i, e){
+  e.stopPropagation(); e.preventDefault();
+  D.products[i].image = '';
+  const prev = document.getElementById(`iprev-p${i}`);
+  const ph   = document.getElementById(`iph-p${i}`);
+  if(prev){ prev.src=''; prev.classList.add('empty'); prev.style.display='none'; }
+  if(ph)   ph.style.display = '';
+}
+function clearOpeningImg(e){
+  e.stopPropagation(); e.preventDefault();
+  D.opening.image = '';
+  const prev = document.getElementById('iprev-opening');
+  const ph   = document.getElementById('iph-opening');
+  if(prev){ prev.src=''; prev.classList.add('empty'); prev.style.display='none'; }
+  if(ph)   ph.style.display = '';
 }
 
 function saveAll(){collectFormValues();render();closePanel();}
