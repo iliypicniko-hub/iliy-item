@@ -14,6 +14,12 @@
   },
   "products": [
     {
+      "images": [
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra0_0_1780919563436.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra0_1_1780919566452.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra0_2_1780919569935.jpg",
+        "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra0_3_1780919576386.jpg"
+      ],
       "id": "p1",
       "scene": "棚の上に",
       "h": "本の隣、\n植物のそば。",
@@ -40,6 +46,7 @@
       "side": "lr"
     },
     {
+      "images": [],
       "id": "p2",
       "scene": "壁に",
       "h": "何もなかった壁が、\n語りはじめる。",
@@ -66,6 +73,7 @@
       "side": "rl"
     },
     {
+      "images": [],
       "id": "p3",
       "scene": "テーブルの上に",
       "h": "コーヒーを飲みながら、\nふと目が止まる。",
@@ -92,6 +100,7 @@
       "side": "lr"
     },
     {
+      "images": [],
       "id": "p4",
       "scene": "広い壁に",
       "h": "一枚だけ、\n大きく。",
