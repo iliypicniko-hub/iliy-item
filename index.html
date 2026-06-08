@@ -21,36 +21,19 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--ink);line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
-/* reveal */
 .r{opacity:0;transform:translateY(14px);transition:opacity 1s ease,transform 1s ease;}
 .r.in{opacity:1;transform:translateY(0);}
 .rf{opacity:0;transition:opacity 1.4s ease;}
 .rf.in{opacity:1;}
 
-/* ── SITE HEADER ── */
-.site-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:1.4rem clamp(1.8rem,7vw,5.5rem);
-  display:flex;justify-content:space-between;align-items:center;
-  pointer-events:none;
-}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem clamp(1.8rem,7vw,5.5rem);display:flex;justify-content:space-between;align-items:center;pointer-events:none;}
 .site-header__name{font-size:.65rem;letter-spacing:.45em;color:rgba(255,255,255,.75);font-weight:300;pointer-events:auto;}
 .site-header__sub{font-size:.55rem;letter-spacing:.3em;color:rgba(255,255,255,.4);}
 
-/* ── OPENING ── */
 .opening{position:relative;height:100svh;min-height:520px;overflow:hidden;}
-.opening__bg{
-  position:absolute;inset:0;
-  background-size:cover;background-position:center 30%;background-repeat:no-repeat;
-  filter:brightness(.68) saturate(.82);
-  transform:scale(1.04);animation:zmin 14s ease forwards;
-}
+.opening__bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;background-repeat:no-repeat;filter:brightness(.68) saturate(.82);transform:scale(1.04);animation:zmin 14s ease forwards;}
 @keyframes zmin{to{transform:scale(1);}}
-.opening__text{
-  position:relative;z-index:2;height:100%;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 clamp(1.8rem,7vw,5.5rem) clamp(4rem,10vh,7rem);
-}
+.opening__text{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(1.8rem,7vw,5.5rem) clamp(4rem,10vh,7rem);}
 .opening__label{font-size:.6rem;letter-spacing:.4em;color:rgba(255,255,255,.4);margin-bottom:1.2rem;opacity:0;animation:fin .8s .6s ease forwards;}
 .opening__sub{font-size:clamp(.75rem,1.6vw,.9rem);letter-spacing:.18em;color:rgba(255,255,255,.7);line-height:2.3;opacity:0;animation:fin .9s .9s ease forwards;}
 @keyframes fin{to{opacity:1;}}
@@ -60,12 +43,10 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .scroll-cue__bar::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:rgba(255,255,255,.6);animation:drop 2s 1.5s ease-in-out infinite;}
 @keyframes drop{0%{top:-100%;}100%{top:100%;}}
 
-/* ── INTRO ── */
 .intro{padding:clamp(5rem,12vw,10rem) clamp(1.8rem,7vw,5.5rem);max-width:480px;}
 .intro p{font-size:.78rem;letter-spacing:.1em;line-height:2.8;color:#5a5750;}
 .intro p+p{margin-top:1.8rem;}
 
-/* ── SCENE ── */
 .scene{display:grid;min-height:86vh;}
 .scene--lr{grid-template-columns:58% 1fr;}
 .scene--rl{grid-template-columns:1fr 58%;}
@@ -91,167 +72,75 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .acc-price{margin-top:1.2rem;font-size:.78rem;letter-spacing:.12em;}
 .acc-price small{font-size:.6rem;color:var(--mid);margin-left:.4rem;}
 
-/* ── STRIP ── */
 .strip{overflow:hidden;padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg);}
 .strip__track{display:flex;gap:.7rem;width:max-content;animation:drift 30s linear infinite;}
 @keyframes drift{to{transform:translateX(-50%);}}
 .strip__track img{height:clamp(160px,20vw,250px);width:auto;object-fit:cover;flex-shrink:0;opacity:.9;}
 
-/* ── CLOSING ── */
 .closing{padding:clamp(7rem,14vw,13rem) clamp(1.8rem,7vw,5.5rem);max-width:460px;}
 .closing__quote{font-family:var(--en);font-style:italic;font-weight:300;font-size:clamp(1rem,2.3vw,1.4rem);line-height:1.85;letter-spacing:.03em;color:var(--ink);margin-bottom:2.8rem;}
 .closing__body{font-size:.72rem;letter-spacing:.1em;line-height:2.8;color:#696460;}
 
-/* ── FOOTER ── */
 footer{padding:2.5rem clamp(1.8rem,7vw,5.5rem);border-top:1px solid var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}
 footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 
-/* ── RESPONSIVE ── */
 @media(max-width:740px){
   .scene--lr,.scene--rl{grid-template-columns:1fr;min-height:auto;}
   .scene--rl .scene__photo{order:-1;}
   .scene__photo{height:62vw;min-height:220px;}
 }
 
-/* ════════════════════════════════
-   EDIT BUTTON
-════════════════════════════════ */
-.edit-btn{
-  position:fixed;bottom:2rem;right:2rem;z-index:200;
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,.92);
-  border:1px solid var(--faint);
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 12px rgba(0,0,0,.08);
-  transition:background .2s,transform .2s;
-}
+.edit-btn{position:fixed;bottom:2rem;right:2rem;z-index:200;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid var(--faint);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.08);transition:background .2s,transform .2s;}
 .edit-btn:hover{background:#fff;transform:scale(1.06);}
 .edit-btn svg{width:16px;height:16px;stroke:var(--mid);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ════════════════════════════════
-   EDIT PANEL
-════════════════════════════════ */
-.panel-overlay{
-  position:fixed;inset:0;z-index:300;
-  background:rgba(30,28,26,.45);
-  opacity:0;pointer-events:none;
-  transition:opacity .3s ease;
-}
+.panel-overlay{position:fixed;inset:0;z-index:300;background:rgba(30,28,26,.45);opacity:0;pointer-events:none;transition:opacity .3s ease;}
 .panel-overlay.open{opacity:1;pointer-events:auto;}
-
-.edit-panel{
-  position:fixed;top:0;right:0;bottom:0;z-index:400;
-  width:min(480px,100vw);
-  background:var(--white);
-  overflow-y:auto;
-  transform:translateX(100%);
-  transition:transform .35s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;
-}
+.edit-panel{position:fixed;top:0;right:0;bottom:0;z-index:400;width:min(480px,100vw);background:var(--white);overflow-y:auto;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
 .edit-panel.open{transform:translateX(0);}
-
-.panel-head{
-  padding:1.6rem 1.8rem 1.2rem;
-  border-bottom:1px solid var(--faint);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:var(--white);z-index:1;
-}
+.panel-head{padding:1.6rem 1.8rem 1.2rem;border-bottom:1px solid var(--faint);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1;}
 .panel-head h2{font-size:.72rem;letter-spacing:.3em;font-weight:300;color:var(--ink);}
 .panel-close{background:none;border:none;cursor:pointer;padding:.3rem;color:var(--mid);}
 .panel-close svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;}
-
 .panel-body{padding:1.6rem 1.8rem;flex:1;}
 
-/* タブ */
 .panel-tabs{display:flex;gap:0;margin-bottom:2rem;border-bottom:1px solid var(--faint);}
-.tab-btn{
-  flex:1;padding:.7rem .5rem;
-  font-family:var(--sans);font-size:.62rem;letter-spacing:.2em;font-weight:300;
-  background:none;border:none;cursor:pointer;color:var(--mid);
-  border-bottom:1px solid transparent;margin-bottom:-1px;
-  transition:color .2s,border-color .2s;
-}
+.tab-btn{flex:1;padding:.7rem .5rem;font-family:var(--sans);font-size:.62rem;letter-spacing:.2em;font-weight:300;background:none;border:none;cursor:pointer;color:var(--mid);border-bottom:1px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;}
 .tab-btn.active{color:var(--ink);border-bottom-color:var(--ink);}
-
 .tab-pane{display:none;}
 .tab-pane.active{display:block;}
 
-/* フォーム部品 */
 .field{margin-bottom:1.6rem;}
 .field label{display:block;font-size:.6rem;letter-spacing:.25em;color:var(--mid);margin-bottom:.5rem;}
-.field input[type=text],
-.field textarea{
-  width:100%;
-  padding:.65rem .8rem;
-  border:1px solid var(--faint);
-  background:var(--bg);
-  font-family:var(--sans);font-size:.75rem;font-weight:300;
-  color:var(--ink);line-height:1.7;
-  resize:vertical;
-  transition:border-color .2s;
-  border-radius:2px;
-}
-.field input[type=text]:focus,
-.field textarea:focus{outline:none;border-color:var(--accent);}
+.field input[type=text],.field textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--faint);background:var(--bg);font-family:var(--sans);font-size:.75rem;font-weight:300;color:var(--ink);line-height:1.7;resize:vertical;transition:border-color .2s;border-radius:2px;}
+.field input[type=text]:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{min-height:72px;}
 
-/* 画像ドロップゾーン */
-.img-drop{
-  position:relative;
-  border:1px dashed var(--faint);
-  border-radius:2px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:border-color .2s;
-}
-.img-drop:hover,.img-drop.drag{border-color:var(--accent);}
-.img-drop img{width:100%;height:140px;object-fit:cover;display:block;}
-.img-drop__hint{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
-  background:rgba(246,244,240,.85);
-  opacity:0;transition:opacity .2s;
-  font-size:.6rem;letter-spacing:.15em;color:var(--mid);
-}
-.img-drop:hover .img-drop__hint,.img-drop.drag .img-drop__hint{opacity:1;}
-.img-drop__hint svg{width:20px;height:20px;stroke:var(--mid);fill:none;stroke-width:1.5;}
-.img-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+/* ════ 画像フィールド（新デザイン） ════ */
+.img-field{border:1px solid var(--faint);border-radius:2px;overflow:hidden;background:var(--bg);}
+.img-field__preview{position:relative;height:140px;background:#e8e5e0;}
+.img-field__preview img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-field__preview img[src=""]{display:none;}
+.img-field__preview-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.6rem;letter-spacing:.15em;color:var(--faint);}
+.img-field__actions{display:flex;border-top:1px solid var(--faint);}
+.img-field__url{flex:1;padding:.55rem .8rem;border:none;background:var(--bg);font-family:var(--sans);font-size:.7rem;font-weight:300;color:var(--ink);outline:none;}
+.img-field__url::placeholder{color:var(--faint);}
+.img-field__url:focus{background:#fff;}
+.img-field__paste-btn{padding:.55rem .9rem;background:none;border:none;border-left:1px solid var(--faint);cursor:pointer;font-family:var(--sans);font-size:.58rem;letter-spacing:.15em;color:var(--mid);white-space:nowrap;transition:background .2s,color .2s;}
+.img-field__paste-btn:hover{background:var(--accent);color:#fff;}
+.img-field__hint{padding:.5rem .8rem;font-size:.58rem;letter-spacing:.08em;color:var(--faint);line-height:1.7;border-top:1px solid var(--faint);}
+.img-field__hint a{color:var(--accent);text-decoration:none;}
 
-/* 商品カード（タブ内） */
-.product-edit-card{
-  border:1px solid var(--faint);
-  border-radius:2px;
-  padding:1.2rem 1.2rem 1.4rem;
-  margin-bottom:1.4rem;
-  background:var(--bg);
-}
-.product-edit-card summary{
-  font-size:.65rem;letter-spacing:.25em;color:var(--ink);
-  cursor:pointer;list-style:none;
-  display:flex;align-items:center;justify-content:space-between;
-}
+.product-edit-card{border:1px solid var(--faint);border-radius:2px;padding:1.2rem 1.2rem 1.4rem;margin-bottom:1.4rem;background:var(--bg);}
+.product-edit-card summary{font-size:.65rem;letter-spacing:.25em;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;}
 .product-edit-card summary::after{content:'＋';color:var(--faint);font-size:.8rem;}
 .product-edit-card[open] summary::after{content:'－';}
 .product-edit-card .inner{padding-top:1.2rem;}
 
-/* 区切り */
 .field-sep{height:1px;background:var(--faint);margin:1.6rem 0;}
 
-/* 保存ボタン */
-.panel-foot{
-  padding:1.2rem 1.8rem;
-  border-top:1px solid var(--faint);
-  position:sticky;bottom:0;background:var(--white);
-}
-.save-btn{
-  width:100%;padding:.85rem;
-  background:var(--ink);color:#fff;
-  border:none;cursor:pointer;
-  font-family:var(--sans);font-size:.65rem;letter-spacing:.3em;font-weight:300;
-  transition:background .2s;
-  border-radius:2px;
-}
+.panel-foot{padding:1.2rem 1.8rem;border-top:1px solid var(--faint);position:sticky;bottom:0;background:var(--white);}
+.save-btn{width:100%;padding:.85rem;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:.65rem;letter-spacing:.3em;font-weight:300;transition:background .2s;border-radius:2px;}
 .save-btn:hover{background:var(--accent);}
 .save-note{font-size:.58rem;letter-spacing:.1em;color:var(--mid);text-align:center;margin-top:.7rem;}
 </style>
@@ -259,13 +148,9 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 <body>
 
 <script>
-/* ════════════════════════════════
-   SITE DATA — ここが唯一の編集源
-   管理画面もGitHub保存もここを読み書きする
-════════════════════════════════ */
 const D = {
   opening: {
-    image:  'images/DSC09711.jpg',
+    image:  '',
     label:  'iliy — Photo Products',
     sub:    '撮ったあとも、その日は続く。\n形にすることで、写真は毎日の景色になる。',
   },
@@ -278,83 +163,29 @@ const D = {
     body:  '撮影後、ゆっくりご検討ください。\n当日でも、後日でも。',
   },
   products: [
-    {
-      id:    'p1',
-      scene: '棚の上に',
-      h:     '本の隣、\n植物のそば。',
-      copy:  '生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。',
-      en:    'Wood Frame',
-      ja:    'ウッドフレーム',
-      specs: [['素材','オーク材 / ガラス（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],
-      price: '¥10,000',
-      priceNote: '税込 / 仮価格',
-      image: 'images/DSC09745.jpg',
-      side:  'lr',
-    },
-    {
-      id:    'p2',
-      scene: '壁に',
-      h:     '何もなかった壁が、\n語りはじめる。',
-      copy:  '存在感はあるのに、\n主張しない。\nそういう一枚が\n部屋を変えます。',
-      en:    'Matt Frame',
-      ja:    'マットフレーム',
-      specs: [['素材','マット紙 / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],
-      price: '¥12,000',
-      priceNote: '税込 / 仮価格',
-      image: 'images/DSC09774.jpg',
-      side:  'rl',
-    },
-    {
-      id:    'p3',
-      scene: 'テーブルの上に',
-      h:     'コーヒーを飲みながら、\nふと目が止まる。',
-      copy:  '木の板に直接プリント。\nフレームのないパネルは\nどこにでも置ける軽さと\n素材の温かさを持っている。',
-      en:    'Wood Panel',
-      ja:    'ウッドパネル',
-      specs: [['素材','シナベニヤ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スティックスタンド']],
-      price: '¥8,000',
-      priceNote: '税込 / 仮価格',
-      image: 'images/DSC09789.jpg',
-      side:  'lr',
-    },
-    {
-      id:    'p4',
-      scene: '広い壁に',
-      h:     '一枚だけ、\n大きく。',
-      copy:  '薄く、軽い。\n横長のフォーマットが\n部屋に静かな広がりをつくる。',
-      en:    'Fabric Panel',
-      ja:    'ファブリックパネル',
-      specs: [['素材','ポリエステル / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],
-      price: '¥15,000',
-      priceNote: '税込 / 仮価格',
-      image: 'images/DSC09760.jpg',
-      side:  'rl',
-    },
+    {id:'p1',scene:'棚の上に',h:'本の隣、\n植物のそば。',copy:'生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。',en:'Wood Frame',ja:'ウッドフレーム',specs:[['素材','オーク材 / ガラス（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥10,000',priceNote:'税込 / 仮価格',image:'',side:'lr'},
+    {id:'p2',scene:'壁に',h:'何もなかった壁が、\n語りはじめる。',copy:'存在感はあるのに、\n主張しない。\nそういう一枚が\n部屋を変えます。',en:'Matt Frame',ja:'マットフレーム',specs:[['素材','マット紙 / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥12,000',priceNote:'税込 / 仮価格',image:'',side:'rl'},
+    {id:'p3',scene:'テーブルの上に',h:'コーヒーを飲みながら、\nふと目が止まる。',copy:'木の板に直接プリント。\nフレームのないパネルは\nどこにでも置ける軽さと\n素材の温かさを持っている。',en:'Wood Panel',ja:'ウッドパネル',specs:[['素材','シナベニヤ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スティックスタンド']],price:'¥8,000',priceNote:'税込 / 仮価格',image:'',side:'lr'},
+    {id:'p4',scene:'広い壁に',h:'一枚だけ、\n大きく。',copy:'薄く、軽い。\n横長のフォーマットが\n部屋に静かな広がりをつくる。',en:'Fabric Panel',ja:'ファブリックパネル',specs:[['素材','ポリエステル / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥15,000',priceNote:'税込 / 仮価格',image:'',side:'rl'},
   ],
-  strip: [
-    'images/DSC09711.jpg','images/DSC09793.jpg','images/DSC09748.jpg',
-    'images/DSC09820.jpg','images/DSC09789.jpg','images/DSC09799.jpg',
-  ],
+  strip: ['','','','','',''],
 };
 
-/* ── 改行コードをBR/テキストに変換 ── */
 function nl2br(s){ return s.replace(/\n/g,'<br>'); }
 
-/* ════════════════════════════════
-   RENDER — Dからページを組み立てる
-════════════════════════════════ */
+/* GitHubのRaw URLを自動生成するヘルパー */
+function ghUser(){ return (JSON.parse(localStorage.getItem('gh_config')||'{}')).user || 'iliypicniko-hub'; }
+function ghRepo(){ return (JSON.parse(localStorage.getItem('gh_config')||'{}')).repo || 'iliy-item'; }
+function rawBase(){ return `https://raw.githubusercontent.com/${ghUser()}/${ghRepo()}/main/`; }
+
 function render(){
-  // opening
-  document.querySelector('.opening__bg').style.backgroundImage = `url('${D.opening.image}')`;
+  document.querySelector('.opening__bg').style.backgroundImage = D.opening.image ? `url('${D.opening.image}')` : 'none';
   document.querySelector('.opening__label').textContent = D.opening.label;
   document.querySelector('.opening__sub').innerHTML = nl2br(D.opening.sub);
-  // intro
   document.getElementById('intro-p1').innerHTML = nl2br(D.intro.p1);
   document.getElementById('intro-p2').innerHTML = nl2br(D.intro.p2);
-  // closing
   document.getElementById('closing-quote').innerHTML = '\u201c' + nl2br(D.closing.quote) + '\u201d';
   document.getElementById('closing-body').innerHTML  = nl2br(D.closing.body);
-  // products
   const list = document.getElementById('product-list');
   list.innerHTML = '';
   D.products.forEach((p,i) => {
@@ -382,29 +213,21 @@ function render(){
           </div>
         </div>
       </div>`;
-    // lr配置はそのまま、rl配置は写真を末尾に移動
-    if(p.side==='rl'){
-      const photo = el.querySelector('.scene__photo');
-      el.appendChild(photo);
-    }
+    if(p.side==='rl'){ el.appendChild(el.querySelector('.scene__photo')); }
     list.appendChild(el);
   });
-  // strip
   const t = document.getElementById('strip-track');
-  const imgs = [...D.strip,...D.strip]; // 2周でループ
+  const imgs = [...D.strip,...D.strip].filter(s=>s);
   t.innerHTML = imgs.map(src=>`<img src="${src}" alt="">`).join('');
-  // observer再適用
   initObserver();
 }
 </script>
 
-<!-- SITE HEADER -->
 <header class="site-header">
   <span class="site-header__name">iliy</span>
   <span class="site-header__sub">Family Photo Studio</span>
 </header>
 
-<!-- OPENING -->
 <section class="opening">
   <div class="opening__bg"></div>
   <div class="opening__text">
@@ -417,41 +240,33 @@ function render(){
   </div>
 </section>
 
-<!-- INTRO -->
 <div class="intro r">
   <p id="intro-p1"></p>
   <p id="intro-p2"></p>
 </div>
 
-<!-- PRODUCTS (JSで生成) -->
 <div id="product-list"></div>
 
-<!-- STRIP -->
 <div class="strip">
   <div class="strip__track" id="strip-track"></div>
 </div>
 
-<!-- CLOSING -->
 <div class="closing r">
   <p class="closing__quote" id="closing-quote"></p>
   <p class="closing__body"  id="closing-body"></p>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <p>iliy — Family Photo Studio</p>
   <p>Photo Products</p>
 </footer>
 
-<!-- EDIT BUTTON -->
 <button class="edit-btn" onclick="openPanel()" title="編集">
   <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
 </button>
 
-<!-- OVERLAY -->
 <div class="panel-overlay" id="overlay" onclick="closePanel()"></div>
 
-<!-- EDIT PANEL -->
 <div class="edit-panel" id="editPanel">
   <div class="panel-head">
     <h2>EDIT CONTENT</h2>
@@ -461,25 +276,26 @@ function render(){
   </div>
 
   <div class="panel-body">
-    <!-- タブ -->
     <div class="panel-tabs">
       <button class="tab-btn active" onclick="showTab('tab-page',this)">ページ</button>
       <button class="tab-btn" onclick="showTab('tab-products',this)">商品</button>
     </div>
 
-    <!-- タブ: ページ全体 -->
     <div class="tab-pane active" id="tab-page">
-
       <div class="field">
         <label>トップ画像</label>
-        <div class="img-drop" id="drop-opening"
-          ondragover="onDrag(event,this)" ondragleave="offDrag(this)" ondrop="onDrop(event,'opening','image',this)">
-          <img id="prev-opening" src="" alt="">
-          <div class="img-drop__hint">
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            ドロップ or クリックで変更
+        <div class="img-field">
+          <div class="img-field__preview">
+            <img id="prev-opening" src="" alt="">
+            <div class="img-field__preview-empty" id="prev-opening-empty">画像なし</div>
           </div>
-          <input type="file" accept="image/*" onchange="onFile(event,'opening','image','prev-opening')">
+          <div class="img-field__actions">
+            <input class="img-field__url" type="text" id="f-opening-image" placeholder="画像URLをここに貼り付け" oninput="onUrlInput('opening','image','prev-opening','prev-opening-empty',this.value)">
+            <button class="img-field__paste-btn" onclick="pasteUrl('f-opening-image','opening','image','prev-opening','prev-opening-empty')">貼り付け</button>
+          </div>
+          <div class="img-field__hint">
+            GitHubの写真を開いて「Raw」ボタン → URLをコピー → 上に貼り付け
+          </div>
         </div>
       </div>
 
@@ -511,22 +327,20 @@ function render(){
       </div>
     </div>
 
-    <!-- タブ: 商品 -->
     <div class="tab-pane" id="tab-products">
       <div id="product-fields"></div>
     </div>
-
-  </div><!-- /panel-body -->
+  </div>
 
   <div class="panel-foot">
     <div id="gh-setup" style="margin-bottom:1rem;display:none;">
       <div class="field" style="margin-bottom:.6rem;">
         <label>GitHub ユーザー名</label>
-        <input type="text" id="gh-user" placeholder="例: yourname">
+        <input type="text" id="gh-user" placeholder="例: iliypicniko-hub">
       </div>
       <div class="field" style="margin-bottom:.6rem;">
         <label>リポジトリ名</label>
-        <input type="text" id="gh-repo" placeholder="例: iliy-products">
+        <input type="text" id="gh-repo" placeholder="例: iliy-item">
       </div>
       <div class="field" style="margin-bottom:.6rem;">
         <label>ブランチ名</label>
@@ -536,9 +350,6 @@ function render(){
         <label>Personal Access Token</label>
         <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx">
       </div>
-      <p style="font-size:.58rem;letter-spacing:.08em;color:var(--mid);margin-top:.5rem;line-height:1.8;">
-        トークンは保存ボタンを押したときだけ使用。<br>このブラウザにのみ保存されます。
-      </p>
     </div>
     <div style="display:flex;gap:.6rem;margin-bottom:.6rem;">
       <button class="save-btn" style="flex:1;" onclick="saveAll()">ページに反映</button>
@@ -552,7 +363,6 @@ function render(){
 </div>
 
 <script>
-/* ── アコーディオン ── */
 function togAcc(aId,tId){
   const a=document.getElementById(aId),t=document.getElementById(tId);
   const was=a.classList.contains('open');
@@ -561,23 +371,56 @@ function togAcc(aId,tId){
   if(!was){a.classList.add('open');t.classList.add('open');}
 }
 
-/* ── スクロールアニメ ── */
 function initObserver(){
   const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.08});
   document.querySelectorAll('.r,.rf').forEach(el=>{el.classList.remove('in');io.observe(el);});
 }
 
-/* ── パネル開閉 ── */
+/* 画像URL入力 */
+function onUrlInput(section, key, prevId, emptyId, url){
+  const img = document.getElementById(prevId);
+  const empty = document.getElementById(emptyId);
+  if(url){
+    img.src = url;
+    img.style.display = 'block';
+    if(empty) empty.style.display = 'none';
+    if(section === 'product'){
+      D.products[key].image = url;
+    } else {
+      D[section][key] = url;
+    }
+  } else {
+    img.src = '';
+    img.style.display = 'none';
+    if(empty) empty.style.display = 'flex';
+  }
+}
+
+async function pasteUrl(inputId, section, key, prevId, emptyId){
+  try {
+    const text = await navigator.clipboard.readText();
+    const input = document.getElementById(inputId);
+    input.value = text;
+    onUrlInput(section, key, prevId, emptyId, text);
+  } catch(e) {
+    document.getElementById(inputId).focus();
+  }
+}
+
 function openPanel(){
-  // フォームにDの値をセット
   document.getElementById('f-opening-sub').value   = D.opening.sub;
   document.getElementById('f-intro-p1').value      = D.intro.p1;
   document.getElementById('f-intro-p2').value      = D.intro.p2;
   document.getElementById('f-closing-quote').value = D.closing.quote;
   document.getElementById('f-closing-body').value  = D.closing.body;
-  document.getElementById('prev-opening').src       = D.opening.image;
 
-  // 商品フォームを生成
+  // トップ画像
+  const prevO = document.getElementById('prev-opening');
+  const emptyO = document.getElementById('prev-opening-empty');
+  document.getElementById('f-opening-image').value = D.opening.image || '';
+  if(D.opening.image){ prevO.src=D.opening.image; prevO.style.display='block'; if(emptyO)emptyO.style.display='none'; }
+  else{ prevO.src=''; prevO.style.display='none'; if(emptyO)emptyO.style.display='flex'; }
+
   const pf = document.getElementById('product-fields');
   pf.innerHTML = '';
   D.products.forEach((p,i)=>{
@@ -588,15 +431,16 @@ function openPanel(){
       <div class="inner">
         <div class="field">
           <label>商品画像</label>
-          <div class="img-drop" id="pdrop-${i}"
-            ondragover="onDrag(event,this)" ondragleave="offDrag(this)"
-            ondrop="onDropProduct(event,${i},this)">
-            <img id="pprev-${i}" src="${p.image}" alt="">
-            <div class="img-drop__hint">
-              <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:var(--mid);fill:none;stroke-width:1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              ドロップ or クリックで変更
+          <div class="img-field">
+            <div class="img-field__preview">
+              <img id="pprev-${i}" src="${p.image||''}" alt="" style="${p.image?'':'display:none'}">
+              <div class="img-field__preview-empty" id="pprev-empty-${i}" style="${p.image?'display:none':''}">画像なし</div>
             </div>
-            <input type="file" accept="image/*" onchange="onFileProduct(event,${i},'pprev-${i}')">
+            <div class="img-field__actions">
+              <input class="img-field__url" type="text" id="pimg-${i}" value="${p.image||''}" placeholder="画像URLをここに貼り付け" oninput="onUrlInput('product',${i},'pprev-${i}','pprev-empty-${i}',this.value)">
+              <button class="img-field__paste-btn" onclick="pasteUrl('pimg-${i}','product',${i},'pprev-${i}','pprev-empty-${i}')">貼り付け</button>
+            </div>
+            <div class="img-field__hint">GitHubの写真 → Rawボタン → URLをコピー → 貼り付け</div>
           </div>
         </div>
         <div class="field"><label>場所ラベル</label><input type="text" id="ps-${i}" value="${p.scene}"></div>
@@ -606,9 +450,7 @@ function openPanel(){
         <div class="field"><label>商品名（日本語）</label><input type="text" id="pja-${i}" value="${p.ja}"></div>
         <div class="field"><label>価格</label><input type="text" id="ppr-${i}" value="${p.price}"></div>
         <div class="field"><label>価格 補足</label><input type="text" id="ppn-${i}" value="${p.priceNote}"></div>
-        ${p.specs.map((s,j)=>`
-        <div class="field"><label>仕様 ${j+1}（${s[0]}）</label><input type="text" id="psp-${i}-${j}" value="${s[1]}"></div>
-        `).join('')}
+        ${p.specs.map((s,j)=>`<div class="field"><label>仕様 ${j+1}（${s[0]}）</label><input type="text" id="psp-${i}-${j}" value="${s[1]}"></div>`).join('')}
       </div>`;
     pf.appendChild(d);
   });
@@ -616,12 +458,12 @@ function openPanel(){
   document.getElementById('overlay').classList.add('open');
   document.getElementById('editPanel').classList.add('open');
 }
+
 function closePanel(){
   document.getElementById('overlay').classList.remove('open');
   document.getElementById('editPanel').classList.remove('open');
 }
 
-/* ── タブ切り替え ── */
 function showTab(id,btn){
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -629,44 +471,9 @@ function showTab(id,btn){
   btn.classList.add('active');
 }
 
-/* ── 画像ドロップ ── */
-function onDrag(e,el){e.preventDefault();el.classList.add('drag');}
-function offDrag(el){el.classList.remove('drag');}
-function onDrop(e,section,key,el){
-  e.preventDefault();offDrag(el);
-  const file=e.dataTransfer.files[0];
-  if(!file||!file.type.startsWith('image/'))return;
-  const url=URL.createObjectURL(file);
-  D[section][key]=url;
-  el.querySelector('img').src=url;
-}
-function onFile(e,section,key,prevId){
-  const file=e.target.files[0];if(!file)return;
-  const url=URL.createObjectURL(file);
-  D[section][key]=url;
-  document.getElementById(prevId).src=url;
-}
-function onDropProduct(e,i,el){
-  e.preventDefault();offDrag(el);
-  const file=e.dataTransfer.files[0];
-  if(!file||!file.type.startsWith('image/'))return;
-  const url=URL.createObjectURL(file);
-  D.products[i].image=url;
-  el.querySelector('img').src=url;
-}
-function onFileProduct(e,i,prevId){
-  const file=e.target.files[0];if(!file)return;
-  const url=URL.createObjectURL(file);
-  D.products[i].image=url;
-  document.getElementById(prevId).src=url;
-}
-
-
-/* ── GitHub設定UI ── */
 function toggleGhSetup(){
   const el = document.getElementById('gh-setup');
   el.style.display = el.style.display === 'none' ? 'block' : 'none';
-  // 保存済みの値を復元
   const saved = JSON.parse(localStorage.getItem('gh_config')||'{}');
   if(saved.user)   document.getElementById('gh-user').value   = saved.user;
   if(saved.repo)   document.getElementById('gh-repo').value   = saved.repo;
@@ -679,9 +486,7 @@ function getGhConfig(){
   const repo   = document.getElementById('gh-repo').value.trim();
   const branch = document.getElementById('gh-branch').value.trim() || 'main';
   const token  = document.getElementById('gh-token').value.trim();
-  if(user && repo && token){
-    localStorage.setItem('gh_config', JSON.stringify({user,repo,branch,token}));
-  }
+  if(user && repo && token){ localStorage.setItem('gh_config', JSON.stringify({user,repo,branch,token})); }
   return {user,repo,branch,token};
 }
 
@@ -691,80 +496,16 @@ function setMsg(text, isError=false){
   el.style.color = isError ? '#c0392b' : 'var(--mid)';
 }
 
-async function saveToGitHub(){
-  // まずDに最新フォームの値を反映
-  collectFormValues();
-
-  const {user,repo,branch,token} = getGhConfig();
-  if(!user||!repo||!token){
-    document.getElementById('gh-setup').style.display = 'block';
-    setMsg('⚠ GitHub設定を入力してください', true);
-    return;
-  }
-
-  const btn = document.getElementById('gh-save-btn');
-  btn.textContent = '保存中…';
-  btn.disabled = true;
-  setMsg('');
-
-  const path = 'data.json';
-  const apiBase = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-    'X-GitHub-Api-Version': '2022-11-28'
-  };
-
-  try {
-    // 既存ファイルのSHAを取得（更新に必要）
-    let sha = null;
-    const getRes = await fetch(`${apiBase}?ref=${branch}`, {headers});
-    if(getRes.ok){
-      const existing = await getRes.json();
-      sha = existing.sha;
-    }
-
-    // Dをbase64エンコードしてPUT
-    const json = JSON.stringify(D, null, 2);
-    const b64  = btoa(unescape(encodeURIComponent(json)));
-    const body = {
-      message: 'update: product data',
-      content: b64,
-      branch,
-      ...(sha ? {sha} : {})
-    };
-
-    const putRes = await fetch(apiBase, {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify(body)
-    });
-
-    if(putRes.ok){
-      setMsg('✓ GitHubに保存しました');
-      // ページにも反映
-      render();
-      setTimeout(closePanel, 800);
-    } else {
-      const err = await putRes.json();
-      setMsg('エラー: ' + (err.message||putRes.status), true);
-    }
-  } catch(e) {
-    setMsg('通信エラー: ' + e.message, true);
-  } finally {
-    btn.textContent = 'GitHubに保存';
-    btn.disabled = false;
-  }
-}
-
-/* ── フォームの値をDに収集（saveAllとsaveToGitHubで共用） ── */
 function collectFormValues(){
+  D.opening.image     = document.getElementById('f-opening-image').value.trim();
   D.opening.sub       = document.getElementById('f-opening-sub').value;
   D.intro.p1          = document.getElementById('f-intro-p1').value;
   D.intro.p2          = document.getElementById('f-intro-p2').value;
   D.closing.quote     = document.getElementById('f-closing-quote').value;
   D.closing.body      = document.getElementById('f-closing-body').value;
   D.products.forEach((p,i)=>{
+    const imgEl = document.getElementById(`pimg-${i}`);
+    if(imgEl) p.image = imgEl.value.trim();
     p.scene    = document.getElementById(`ps-${i}`).value;
     p.h        = document.getElementById(`ph-${i}`).value;
     p.copy     = document.getElementById(`pc-${i}`).value;
@@ -772,33 +513,47 @@ function collectFormValues(){
     p.ja       = document.getElementById(`pja-${i}`).value;
     p.price    = document.getElementById(`ppr-${i}`).value;
     p.priceNote= document.getElementById(`ppn-${i}`).value;
-    p.specs.forEach((s,j)=>{
-      s[1]=document.getElementById(`psp-${i}-${j}`).value;
-    });
+    p.specs.forEach((s,j)=>{ s[1]=document.getElementById(`psp-${i}-${j}`).value; });
   });
 }
 
-/* ── 保存（ページに反映のみ） ── */
-function saveAll(){
+async function saveToGitHub(){
   collectFormValues();
-  render();
-  closePanel();
+  const {user,repo,branch,token} = getGhConfig();
+  if(!user||!repo||!token){ document.getElementById('gh-setup').style.display='block'; setMsg('⚠ GitHub設定を入力してください',true); return; }
+  const btn = document.getElementById('gh-save-btn');
+  btn.textContent = '保存中…'; btn.disabled = true; setMsg('');
+  const path = 'data.json';
+  const apiBase = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
+  const headers = {'Authorization':`Bearer ${token}`,'Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
+  try {
+    let sha = null;
+    const getRes = await fetch(`${apiBase}?ref=${branch}`,{headers});
+    if(getRes.ok){ const ex=await getRes.json(); sha=ex.sha; }
+    const json = JSON.stringify(D,null,2);
+    const b64  = btoa(unescape(encodeURIComponent(json)));
+    const body = {message:'update: product data',content:b64,branch,...(sha?{sha}:{})};
+    const putRes = await fetch(apiBase,{method:'PUT',headers,body:JSON.stringify(body)});
+    if(putRes.ok){ setMsg('✓ GitHubに保存しました'); render(); setTimeout(closePanel,800); }
+    else { const err=await putRes.json(); setMsg('エラー: '+(err.message||putRes.status),true); }
+  } catch(e){ setMsg('通信エラー: '+e.message,true); }
+  finally { btn.textContent='GitHubに保存'; btn.disabled=false; }
 }
 
-/* ── 初期化: data.jsonがあればそこからDを上書き ── */
+function saveAll(){ collectFormValues(); render(); closePanel(); }
+
 async function init(){
   try {
-    const res = await fetch('data.json?t=' + Date.now());
+    const res = await fetch('data.json?t='+Date.now());
     if(res.ok){
       const saved = await res.json();
-      // Dに上書きマージ
-      Object.assign(D.opening,  saved.opening  || {});
-      Object.assign(D.intro,    saved.intro    || {});
-      Object.assign(D.closing,  saved.closing  || {});
-      if(saved.products) D.products = saved.products;
-      if(saved.strip)    D.strip    = saved.strip;
+      Object.assign(D.opening, saved.opening||{});
+      Object.assign(D.intro,   saved.intro  ||{});
+      Object.assign(D.closing, saved.closing||{});
+      if(saved.products) D.products=saved.products;
+      if(saved.strip)    D.strip=saved.strip;
     }
-  } catch(e){ /* data.jsonなければデフォルト値で表示 */ }
+  } catch(e){}
   render();
 }
 init();
