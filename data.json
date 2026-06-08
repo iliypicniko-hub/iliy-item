@@ -21,15 +21,15 @@
         "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/extra0_3_1780919576386.jpg"
       ],
       "id": "p1",
-      "scene": "棚の上に",
-      "h": "本の隣、\n植物のそば。",
-      "copy": "生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。",
+      "scene": "テーブルの上に",
+      "h": "そこにいる、\nという存在感。",
+      "copy": "広い余白が、写真を主張させない。\nフレームの木の温かさが、\n生活の中にやわらかく溶け込む。\n近い距離のカットでも、圧迫感がない。\n最初からそこにあったような、静けさ。",
       "en": "Wood Frame",
       "ja": "ウッドフレーム",
       "specs": [
         [
           "素材",
-          "オーク材 / ガラス（仮）"
+          "ウッド素材"
         ],
         [
           "サイズ",
@@ -41,7 +41,7 @@
         ]
       ],
       "price": "¥10,000",
-      "priceNote": "税込 / 仮価格",
+      "priceNote": "税込",
       "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product0_1780909138329.jpg",
       "side": "lr"
     },
