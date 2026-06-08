@@ -9,7 +9,7 @@
     "p2": "形にすることで、\n写真は毎日の景色になります。"
   },
   "closing": {
-    "quote": "無理にすすめることはしません。\nただ、選択肢として\n知っていてほしくて。",
+    "quote": "あなたはどこに、どんな思い出を飾りたいでしょうか？",
     "body": "撮影後、ゆっくりご検討ください。\n当日でも、後日でも。"
   },
   "products": [
@@ -119,11 +119,11 @@
     }
   ],
   "strip": [
-    "images/DSC09711.jpg",
-    "images/DSC09793.jpg",
-    "images/DSC09748.jpg",
-    "images/DSC09820.jpg",
-    "images/DSC09789.jpg",
-    "images/DSC09799.jpg"
+    "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/strip0_1780908674268.jpg",
+    "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/strip1_1780908679982.jpg",
+    "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/strip2_1780908684854.jpg",
+    "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/strip3_1780908692034.jpg",
+    "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/strip4_1780908709606.jpg",
+    "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/strip5_1780908718998.jpg"
   ]
 }
