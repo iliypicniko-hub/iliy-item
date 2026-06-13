@@ -831,28 +831,6 @@ function buildStripGrid(){
 
 
 /* ═══════════════════════════════
-   SORT UI（商品順序）
-═══════════════════════════════ */
-.sort-list{list-style:none;margin-bottom:1rem;}
-.sort-item{
-  display:flex;align-items:center;gap:.8rem;
-  padding:.65rem .9rem;
-  background:var(--bg);border:1px solid var(--faint);
-  margin-bottom:.4rem;border-radius:2px;
-  cursor:grab;user-select:none;
-  transition:background .15s,border-color .15s;
-}
-.sort-item:active{cursor:grabbing;}
-.sort-item.dragging{opacity:.4;}
-.sort-item.drag-over{border-color:var(--accent);background:#f0eeea;}
-.sort-handle{
-  display:flex;flex-direction:column;gap:3px;
-  flex-shrink:0;opacity:.4;
-}
-.sort-handle span{display:block;width:14px;height:1px;background:var(--ink);}
-.sort-item__name{font-size:.68rem;letter-spacing:.15em;color:var(--ink);flex:1;}
-.sort-item__en{font-size:.58rem;letter-spacing:.15em;color:var(--mid);}
-/* ═══════════════════════════════
    PASSWORD
 ═══════════════════════════════ */
 // ▼ パスワードをここで設定してください
