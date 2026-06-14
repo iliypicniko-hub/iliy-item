@@ -919,6 +919,19 @@ function buildProductField(p, i){
           <option value="rl" ${p.side==='rl'?'selected':''}>テキスト 左・写真 右</option>
         </select>
       </div>
+      <div class="field"><label>画像の表示位置</label>
+        <select id="ppos-${i}" style="width:100%;padding:.6rem .8rem;border:1px solid var(--faint);background:var(--bg);font-family:var(--sans);font-size:.75rem;color:var(--ink);border-radius:2px;">
+          <option value="center center" ${(p.imagePosition||'center center')==='center center'?'selected':''}>中央</option>
+          <option value="center top"    ${p.imagePosition==='center top'   ?'selected':''}>上</option>
+          <option value="center bottom" ${p.imagePosition==='center bottom'?'selected':''}>下</option>
+          <option value="left center"   ${p.imagePosition==='left center'  ?'selected':''}>左</option>
+          <option value="right center"  ${p.imagePosition==='right center' ?'selected':''}>右</option>
+          <option value="left top"      ${p.imagePosition==='left top'     ?'selected':''}>左上</option>
+          <option value="right top"     ${p.imagePosition==='right top'    ?'selected':''}>右上</option>
+          <option value="left bottom"   ${p.imagePosition==='left bottom'  ?'selected':''}>左下</option>
+          <option value="right bottom"  ${p.imagePosition==='right bottom' ?'selected':''}>右下</option>
+        </select>
+      </div>
       <button class="del-product-btn" onclick="deleteProduct(${i})">この商品を削除する</button>
     </div>`;
   return d;
@@ -1057,33 +1070,34 @@ function toggleGhSetup(){
 }
 function setMsg(text,isError=false){const el=document.getElementById('save-msg');el.textContent=text;el.style.color=isError?'#c0392b':'var(--mid)';}
 
+function gv(id){ const el=document.getElementById(id); return el?el.value:null; }
+
 function collectFormValues(){
-  D.opening.sub=document.getElementById('f-opening-sub').value;
-  D.intro.p1=document.getElementById('f-intro-p1').value;
-  D.intro.p2=document.getElementById('f-intro-p2').value;
-  D.closing.quote=document.getElementById('f-closing-quote').value;
-  D.closing.body=document.getElementById('f-closing-body').value;
+  D.opening.sub=gv('f-opening-sub')||D.opening.sub;
+  D.intro.p1=gv('f-intro-p1')||D.intro.p1;
+  D.intro.p2=gv('f-intro-p2')||D.intro.p2;
+  D.closing.quote=gv('f-closing-quote')||D.closing.quote;
+  D.closing.body=gv('f-closing-body')||D.closing.body;
   D.products.forEach((p,i)=>{
-    if(!document.getElementById(`ps-${i}`))return;
-    p.scene=document.getElementById(`ps-${i}`).value;
-    p.h=document.getElementById(`ph-${i}`).value;
-    p.copy=document.getElementById(`pc-${i}`).value;
-    p.en=document.getElementById(`pen-${i}`).value;
-    p.ja=document.getElementById(`pja-${i}`).value;
-    p.price=document.getElementById(`ppr-${i}`).value;
-    p.priceNote=document.getElementById(`ppn-${i}`).value;
-    p.side=document.getElementById(`pside-${i}`).value;
-    p.imagePosition=document.getElementById(`ppos-${i}`).value;
+    if(!document.getElementById(`pja-${i}`))return; // カード未生成ならスキップ
+    if(gv(`ps-${i}`)!==null)  p.scene = gv(`ps-${i}`);
+    if(gv(`ph-${i}`)!==null)  p.h     = gv(`ph-${i}`);
+    if(gv(`pc-${i}`)!==null)  p.copy  = gv(`pc-${i}`);
+    if(gv(`pen-${i}`)!==null) p.en    = gv(`pen-${i}`);
+    if(gv(`pja-${i}`)!==null) p.ja    = gv(`pja-${i}`);
+    if(gv(`ppr-${i}`)!==null) p.price = gv(`ppr-${i}`);
+    if(gv(`pside-${i}`)!==null) p.side          = gv(`pside-${i}`);
+    if(gv(`ppos-${i}`)!==null)  p.imagePosition = gv(`ppos-${i}`);
     p.specs.forEach((s,j)=>{
-      const el=document.getElementById(`psp-${i}-${j}`);
-      if(el)s[1]=el.value;
+      const v=gv(`psp-${i}-${j}`);
+      if(v!==null) s[1]=v;
     });
     // sizePrices収集
     const newSp=[];
     let j=0;
     while(document.getElementById(`spsize-${i}-${j}`)){
-      const sz=document.getElementById(`spsize-${i}-${j}`).value.trim();
-      const pr=document.getElementById(`spprice-${i}-${j}`).value.trim();
+      const sz=gv(`spsize-${i}-${j}`)||'';
+      const pr=gv(`spprice-${i}-${j}`)||'';
       if(sz||pr) newSp.push({size:sz,price:pr});
       j++;
     }
