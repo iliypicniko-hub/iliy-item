@@ -361,6 +361,121 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .save-btn{width:100%;padding:.85rem;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:.65rem;letter-spacing:.3em;font-weight:300;transition:background .2s;border-radius:2px;}
 .save-btn:hover{background:var(--accent);}
 .save-note{font-size:.58rem;letter-spacing:.1em;color:var(--mid);text-align:center;margin-top:.7rem;}
+
+/* ═══════════════════════════════
+   IMAGE CROPPER
+═══════════════════════════════ */
+.crop-overlay{
+  position:fixed;inset:0;z-index:600;
+  background:rgba(20,18,15,.88);
+  display:none;align-items:center;justify-content:center;
+}
+.crop-overlay.open{display:flex;}
+.crop-box{
+  background:var(--white);
+  padding:1.5rem;
+  width:min(480px,95vw);
+  display:flex;flex-direction:column;gap:1rem;
+}
+.crop-box h3{font-size:.65rem;letter-spacing:.3em;color:var(--mid);font-weight:300;}
+.crop-canvas-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:1;
+  background:#111;
+  overflow:hidden;
+  cursor:crosshair;
+  touch-action:none;
+}
+.crop-canvas-wrap img{
+  position:absolute;
+  transform-origin:top left;
+  user-select:none;
+  pointer-events:none;
+}
+.crop-rect{
+  position:absolute;
+  border:2px solid #fff;
+  box-shadow:0 0 0 9999px rgba(0,0,0,.55);
+  cursor:move;
+}
+.crop-hint{font-size:.6rem;letter-spacing:.12em;color:var(--mid);text-align:center;}
+.crop-actions{display:flex;gap:.6rem;}
+.crop-btn{
+  flex:1;padding:.7rem;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;font-weight:300;
+  transition:background .2s;
+}
+.crop-btn.cancel{background:var(--bg);color:var(--mid);}
+.crop-btn.cancel:hover{background:var(--line);}
+.crop-btn.ok{background:var(--ink);color:#fff;}
+.crop-btn.ok:hover{background:var(--accent);}
+
+/* ═══════════════════════════════
+   SIZE-PRICE TABLE (edit panel)
+═══════════════════════════════ */
+.sp-table{width:100%;border-collapse:collapse;margin-top:.4rem;}
+.sp-table th{
+  font-size:.58rem;letter-spacing:.2em;color:var(--mid);
+  padding:.4rem .5rem;border-bottom:1px solid var(--line);
+  font-weight:300;text-align:left;
+}
+.sp-table td{padding:.35rem .3rem;border-bottom:1px solid #ebe8e3;vertical-align:middle;}
+.sp-table td input{
+  width:100%;padding:.45rem .55rem;
+  border:1px solid var(--line);background:var(--bg);
+  font-family:var(--sans);font-size:.72rem;font-weight:300;color:var(--ink);
+  border-radius:0;
+}
+.sp-table td input:focus{outline:none;border-color:var(--accent);}
+.sp-del-btn{
+  background:none;border:none;cursor:pointer;
+  color:var(--faint);font-size:.9rem;line-height:1;padding:.2rem .3rem;
+  transition:color .2s;
+}
+.sp-del-btn:hover{color:#c0392b;}
+.sp-add-btn{
+  width:100%;margin-top:.5rem;padding:.5rem;
+  border:1px dashed var(--faint);background:none;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.2em;color:var(--mid);
+  cursor:pointer;transition:border-color .2s,color .2s;
+}
+.sp-add-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ═══════════════════════════════
+   MODAL — 正方形表示
+═══════════════════════════════ */
+.modal__main-img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  background:#e8e5e0;
+}
+.modal__thumb{
+  width:56px;height:56px;
+  object-fit:cover;object-position:center;
+  cursor:pointer;background:#e8e5e0;
+  border:1.5px solid transparent;
+  transition:border-color .2s;
+  flex-shrink:0;
+  aspect-ratio:1;
+}
+
+/* サイズ価格表（モーダル表示） */
+.modal__sp-table{width:100%;border-collapse:collapse;margin-top:.5rem;margin-bottom:1.2rem;}
+.modal__sp-table th{
+  font-size:.58rem;letter-spacing:.18em;color:var(--mid);
+  padding:.4rem .5rem;border-bottom:1px solid var(--line);
+  font-weight:300;text-align:left;
+}
+.modal__sp-table td{
+  font-size:.72rem;letter-spacing:.06em;
+  padding:.45rem .5rem;border-bottom:1px solid #ebe8e3;color:var(--ink);
+}
+.modal__sp-table td:last-child{text-align:right;color:var(--accent);}
+
 </style>
 </head>
 <body>
@@ -374,10 +489,10 @@ const D = {
   intro:{p1:'スマートフォンの中に眠ったまま、\n見返すことのない写真たち。',p2:'形にすることで、\n写真は毎日の景色になります。'},
   closing:{quote:'無理にすすめることはしません。\nただ、選択肢として\n知っていてほしくて。',body:'撮影後、ゆっくりご検討ください。\n当日でも、後日でも。'},
   products:[
-    {id:'p1',scene:'棚の上に',h:'本の隣、\n植物のそば。',copy:'生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。',en:'Wood Frame',ja:'ウッドフレーム',specs:[['素材','オーク材 / ガラス（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥10,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'lr'},
-    {id:'p2',scene:'壁に',h:'何もなかった壁が、\n語りはじめる。',copy:'存在感はあるのに、\n主張しない。\nそういう一枚が\n部屋を変えます。',en:'Matt Frame',ja:'マットフレーム',specs:[['素材','マット紙 / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥12,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'rl'},
-    {id:'p3',scene:'テーブルの上に',h:'コーヒーを飲みながら、\nふと目が止まる。',copy:'木の板に直接プリント。\nフレームのないパネルは\nどこにでも置ける軽さと\n素材の温かさを持っている。',en:'Wood Panel',ja:'ウッドパネル',specs:[['素材','シナベニヤ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スティックスタンド']],price:'¥8,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'lr'},
-    {id:'p4',scene:'広い壁に',h:'一枚だけ、\n大きく。',copy:'薄く、軽い。\n横長のフォーマットが\n部屋に静かな広がりをつくる。',en:'Fabric Panel',ja:'ファブリックパネル',specs:[['素材','ポリエステル / アルミ（仮）'],['サイズ','〇〇 × 〇〇 cm（仮）'],['設置','壁掛け・スタンド']],price:'¥15,000',priceNote:'税込 / 仮価格',image:'',images:[],side:'rl'},
+    {id:'p1',scene:'棚の上に',h:'本の隣、\n植物のそば。',copy:'生活の中にすでにある場所に、\nそっと加わる一枚。\n最初からそこにあったような\n自然なたたずまい。',en:'Wood Frame',ja:'ウッドフレーム',specs:[['素材','オーク材 / ガラス'],['設置','壁掛け・スタンド']],sizePrices:[{size:'S',price:'¥6,600'},{size:'M',price:'¥8,800'}],image:'',images:[],side:'lr'},
+    {id:'p2',scene:'壁に',h:'何もなかった壁が、\n語りはじめる。',copy:'存在感はあるのに、\n主張しない。\nそういう一枚が\n部屋を変えます。',en:'Matt Frame',ja:'マットフレーム',specs:[['素材','Vカットマット台紙'],['設置','壁掛け・スタンド']],sizePrices:[{size:'スクエア',price:'¥9,592'}],image:'',images:[],side:'rl'},
+    {id:'p3',scene:'テーブルの上に',h:'コーヒーを飲みながら、\nふと目が止まる。',copy:'木の板に直接プリント。\nフレームのないパネルは\nどこにでも置ける軽さと\n素材の温かさを持っている。',en:'Wood Panel',ja:'ウッドパネル',specs:[['素材','シナベニヤ'],['設置','壁掛け・スティックスタンド']],sizePrices:[{size:'152SQ',price:'¥3,530'}],image:'',images:[],side:'lr'},
+    {id:'p4',scene:'広い壁に',h:'一枚だけ、\n大きく。',copy:'薄く、軽い。\n横長のフォーマットが\n部屋に静かな広がりをつくる。',en:'Fabric Panel',ja:'ファブリックパネル',specs:[['素材','クッション素材'],['設置','壁掛け・スタンド・直置き']],sizePrices:[{size:'A5',price:'¥2,000'},{size:'A4',price:'¥2,500'},{size:'A3',price:'¥3,000'}],image:'',images:[],side:'rl'},
   ],
   strip:['','','','','',''],
 };
@@ -427,6 +542,23 @@ function render(){
 </script>
 
 <!-- HTML骨格 -->
+
+<!-- CROP OVERLAY -->
+<div class="crop-overlay" id="cropOverlay">
+  <div class="crop-box">
+    <h3>画像をトリミング（正方形）</h3>
+    <div class="crop-canvas-wrap" id="cropWrap">
+      <img id="cropImg" src="" alt="">
+      <div class="crop-rect" id="cropRect"></div>
+    </div>
+    <p class="crop-hint">ドラッグで範囲を移動、端をドラッグで拡縮</p>
+    <div class="crop-actions">
+      <button class="crop-btn cancel" onclick="cancelCrop()">キャンセル</button>
+      <button class="crop-btn ok" onclick="confirmCrop()">この範囲で決定</button>
+    </div>
+  </div>
+</div>
+
 <header class="site-header">
   <span class="site-header__name">iliy</span>
   <span class="site-header__sub">Family Photo Studio</span>
@@ -583,6 +715,14 @@ function openModal(idx){
     thumbs.appendChild(img);
   });
 
+  // サイズ価格テーブルHTML
+  const spHtml = (p.sizePrices && p.sizePrices.length > 0)
+    ? `<table class="modal__sp-table">
+        <tr><th>サイズ・仕様</th><th style="text-align:right">料金（税込）</th></tr>
+        ${p.sizePrices.map(sp=>`<tr><td>${sp.size}</td><td style="text-align:right;color:var(--accent)">${sp.price}</td></tr>`).join('')}
+       </table>`
+    : (p.price ? `<p class="modal__price">${p.price} <small>${p.priceNote||''}</small></p>` : '');
+
   // 情報
   document.getElementById('modal-info').innerHTML = `
     <p class="modal__en">${p.en}</p>
@@ -591,7 +731,7 @@ function openModal(idx){
     <dl class="modal__specs">
       ${(p.specs||[]).map(s=>`<div class="modal__spec-row"><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}
     </dl>
-    <p class="modal__price">${p.price} <small>${p.priceNote}</small></p>`;
+    ${spHtml}`;
 
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -631,6 +771,18 @@ function startBar(barId){const bar=document.getElementById(barId);if(!bar)return
 function finishBar(barId,iv){clearInterval(iv);const bar=document.getElementById(barId);if(bar)bar.style.width='100%';}
 
 async function handleImageFile(file,domKey){
+  // 画像ファイルならまずクロッパーを開く
+  if(file.type.startsWith('image/')){
+    openCropper(file,(croppedBlob)=>{
+      const croppedFile=new File([croppedBlob],file.name,{type:'image/jpeg'});
+      _doUpload(croppedFile,domKey);
+    });
+    return;
+  }
+  _doUpload(file,domKey);
+}
+
+async function _doUpload(file,domKey){
   const isProduct=domKey.startsWith('product-');
   const isExtra=domKey.startsWith('extra-');
   const isStrip=domKey.startsWith('strip-');
@@ -925,6 +1077,16 @@ function collectFormValues(){
       const el=document.getElementById(`psp-${i}-${j}`);
       if(el)s[1]=el.value;
     });
+    // sizePrices収集
+    const newSp=[];
+    let j=0;
+    while(document.getElementById(`spsize-${i}-${j}`)){
+      const sz=document.getElementById(`spsize-${i}-${j}`).value.trim();
+      const pr=document.getElementById(`spprice-${i}-${j}`).value.trim();
+      if(sz||pr) newSp.push({size:sz,price:pr});
+      j++;
+    }
+    p.sizePrices=newSp;
   });
 }
 
@@ -1038,6 +1200,161 @@ function buildSortList(){
 }
 
 function saveAll(){collectFormValues();render();closePanel();}
+
+
+/* ═══════════════════════════════
+   SIZE-PRICE ROW 操作
+═══════════════════════════════ */
+function addSpRow(pi){
+  collectFormValues();
+  D.products[pi].sizePrices.push({size:'',price:''});
+  buildProductFields();
+  const card=document.getElementById(`pcard-${pi}`);
+  card.classList.add('open');
+  card.querySelector('.product-edit-card__toggle').textContent='－';
+}
+function delSpRow(pi,ji){
+  collectFormValues();
+  D.products[pi].sizePrices.splice(ji,1);
+  buildProductFields();
+  const card=document.getElementById(`pcard-${pi}`);
+  card.classList.add('open');
+  card.querySelector('.product-edit-card__toggle').textContent='－';
+}
+
+/* ═══════════════════════════════
+   IMAGE CROPPER
+═══════════════════════════════ */
+let _cropCallback=null;
+let _cropScale=1;
+let _cropNaturalW=0,_cropNaturalH=0;
+let _cropWrapW=0,_cropWrapH=0;
+let _cropX=0,_cropY=0,_cropSize=0;
+let _dragMode=null; // 'move'|'resize'
+let _dragStartX=0,_dragStartY=0,_dragStartCropX=0,_dragStartCropY=0,_dragStartSize=0;
+
+function openCropper(file, callback){
+  _cropCallback=callback;
+  const url=URL.createObjectURL(file);
+  const img=document.getElementById('cropImg');
+  img.onload=()=>{
+    _cropNaturalW=img.naturalWidth;
+    _cropNaturalH=img.naturalHeight;
+    const wrap=document.getElementById('cropWrap');
+    _cropWrapW=wrap.offsetWidth;
+    _cropWrapH=wrap.offsetHeight;
+    // fit image into wrap
+    const scaleX=_cropWrapW/_cropNaturalW;
+    const scaleY=_cropWrapH/_cropNaturalH;
+    _cropScale=Math.min(scaleX,scaleY);
+    const dispW=_cropNaturalW*_cropScale;
+    const dispH=_cropNaturalH*_cropScale;
+    const offX=(_cropWrapW-dispW)/2;
+    const offY=(_cropWrapH-dispH)/2;
+    img.style.transform=`translate(${offX}px,${offY}px) scale(${_cropScale})`;
+    img.style.transformOrigin='top left';
+    img.style.width=_cropNaturalW+'px';
+    img.style.height=_cropNaturalH+'px';
+    // initial crop: center square
+    _cropSize=Math.min(dispW,dispH)*0.8;
+    _cropX=offX+(dispW-_cropSize)/2;
+    _cropY=offY+(dispH-_cropSize)/2;
+    updateCropRect();
+  };
+  img.src=url;
+  document.getElementById('cropOverlay').classList.add('open');
+}
+
+function updateCropRect(){
+  const r=document.getElementById('cropRect');
+  r.style.left=_cropX+'px';
+  r.style.top=_cropY+'px';
+  r.style.width=_cropSize+'px';
+  r.style.height=_cropSize+'px';
+}
+
+// drag events
+const cropWrap=document.addEventListener('DOMContentLoaded',()=>{
+  const wrap=document.getElementById('cropWrap');
+  const rect=document.getElementById('cropRect');
+
+  const getPos=(e)=>{
+    const r=wrap.getBoundingClientRect();
+    const src=e.touches?e.touches[0]:e;
+    return{x:src.clientX-r.left,y:src.clientY-r.top};
+  };
+
+  const onStart=(e)=>{
+    if(document.getElementById('cropOverlay').style.display==='none') return;
+    const {x,y}=getPos(e);
+    const edge=14;
+    const inRect=x>=_cropX&&x<=_cropX+_cropSize&&y>=_cropY&&y<=_cropY+_cropSize;
+    const onEdge=x>=_cropX+_cropSize-edge||y>=_cropY+_cropSize-edge;
+    if(!inRect) return;
+    _dragStartX=x;_dragStartY=y;
+    _dragStartCropX=_cropX;_dragStartCropY=_cropY;_dragStartSize=_cropSize;
+    _dragMode=onEdge?'resize':'move';
+    e.preventDefault();
+  };
+  const onMove=(e)=>{
+    if(!_dragMode) return;
+    e.preventDefault();
+    const {x,y}=getPos(e);
+    const dx=x-_dragStartX, dy=y-_dragStartY;
+    const img=document.getElementById('cropImg');
+    const scaleX=img.getBoundingClientRect().width/_cropNaturalW;
+    const scaleY=img.getBoundingClientRect().height/_cropNaturalH;
+    const imgRect=img.getBoundingClientRect();
+    const wrapRect=wrap.getBoundingClientRect();
+    const imgL=imgRect.left-wrapRect.left;
+    const imgT=imgRect.top-wrapRect.top;
+    const imgW=_cropNaturalW*scaleX;
+    const imgH=_cropNaturalH*scaleY;
+    if(_dragMode==='move'){
+      _cropX=Math.max(imgL,Math.min(_dragStartCropX+dx,imgL+imgW-_cropSize));
+      _cropY=Math.max(imgT,Math.min(_dragStartCropY+dy,imgT+imgH-_cropSize));
+    } else {
+      const delta=Math.max(dx,dy);
+      _cropSize=Math.max(40,Math.min(_dragStartSize+delta,imgW,imgH));
+      _cropX=Math.min(_dragStartCropX,imgL+imgW-_cropSize);
+      _cropY=Math.min(_dragStartCropY,imgT+imgH-_cropSize);
+    }
+    updateCropRect();
+  };
+  const onEnd=()=>{_dragMode=null;};
+  wrap.addEventListener('mousedown',onStart);
+  wrap.addEventListener('touchstart',onStart,{passive:false});
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('mouseup',onEnd);
+  document.addEventListener('touchend',onEnd);
+});
+
+function cancelCrop(){
+  document.getElementById('cropOverlay').classList.remove('open');
+  _cropCallback=null;
+}
+
+function confirmCrop(){
+  const img=document.getElementById('cropImg');
+  const wrap=document.getElementById('cropWrap');
+  const wrapRect=wrap.getBoundingClientRect();
+  const imgRect=img.getBoundingClientRect();
+  const scaleX=_cropNaturalW/imgRect.width;
+  const scaleY=_cropNaturalH/imgRect.height;
+  const cropXInImg=(_cropX-(imgRect.left-wrapRect.left))*scaleX;
+  const cropYInImg=(_cropY-(imgRect.top-wrapRect.top))*scaleY;
+  const cropSizeInImg=_cropSize*scaleX;
+  const canvas=document.createElement('canvas');
+  const OUTPUT=800;
+  canvas.width=OUTPUT;canvas.height=OUTPUT;
+  const ctx=canvas.getContext('2d');
+  ctx.drawImage(img,cropXInImg,cropYInImg,cropSizeInImg,cropSizeInImg,0,0,OUTPUT,OUTPUT);
+  canvas.toBlob(blob=>{
+    if(_cropCallback) _cropCallback(blob);
+    document.getElementById('cropOverlay').classList.remove('open');
+  },'image/jpeg',0.88);
+}
 
 async function init(){
   const saved=JSON.parse(localStorage.getItem('gh_config')||'{}');
