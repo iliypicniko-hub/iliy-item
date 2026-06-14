@@ -517,7 +517,7 @@ function render(){
     const el=document.createElement('section');
     el.className=`scene scene--${p.side}`;
     el.innerHTML=`
-      <div class="scene__photo rf"><img src="${p.image||''}" alt="${p.ja}"></div>
+      <div class="scene__photo rf"><img src="${p.image||''}" alt="${p.ja}" style="object-position:${p.imagePosition||'center center'}"></div>
       <div class="scene__body">
         <p class="scene__where r">${p.scene}</p>
         <p class="scene__product-name r">${p.ja}<span>${p.en}</span></p>
@@ -1073,6 +1073,7 @@ function collectFormValues(){
     p.price=document.getElementById(`ppr-${i}`).value;
     p.priceNote=document.getElementById(`ppn-${i}`).value;
     p.side=document.getElementById(`pside-${i}`).value;
+    p.imagePosition=document.getElementById(`ppos-${i}`).value;
     p.specs.forEach((s,j)=>{
       const el=document.getElementById(`psp-${i}-${j}`);
       if(el)s[1]=el.value;
