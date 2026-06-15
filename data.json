@@ -42,9 +42,10 @@
       ],
       "price": "¥8,000",
       "priceNote": "税込 / 仮価格",
-      "image": "",
+      "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product0_1781484614195.jpg",
       "side": "lr",
-      "sizePrices": []
+      "sizePrices": [],
+      "imagePosition": "center center"
     },
     {
       "images": [
@@ -78,7 +79,8 @@
       "priceNote": "税込 / 仮価格",
       "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product3_1780909492791.jpg",
       "side": "rl",
-      "sizePrices": []
+      "sizePrices": [],
+      "imagePosition": "center center"
     },
     {
       "images": [
@@ -111,7 +113,8 @@
       "priceNote": "税込",
       "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product0_1780909138329.jpg",
       "side": "lr",
-      "sizePrices": []
+      "sizePrices": [],
+      "imagePosition": "center center"
     },
     {
       "images": [
@@ -144,7 +147,8 @@
       "priceNote": "税込 / 仮価格",
       "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product1_1780909226809.jpg",
       "side": "rl",
-      "sizePrices": []
+      "sizePrices": [],
+      "imagePosition": "center center"
     }
   ],
   "strip": [
