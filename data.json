@@ -69,22 +69,35 @@
       "specs": [
         [
           "素材",
-          "ポリエステル / アルミ（仮）"
+          ""
         ],
         [
           "サイズ",
-          "〇〇 × 〇〇 cm（仮）"
+          ""
         ],
         [
           "設置",
           "壁掛け・スタンド"
         ]
       ],
-      "price": "¥15,000",
+      "price": "¥5,400~",
       "priceNote": "税込 / 仮価格",
       "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product3_1780909492791.jpg",
       "side": "rl",
-      "sizePrices": [],
+      "sizePrices": [
+        {
+          "size": "S（A5サイズ）",
+          "price": "¥5,400"
+        },
+        {
+          "size": "M（A4サイズ）",
+          "price": "¥6,600"
+        },
+        {
+          "size": "L（A3サイズ）",
+          "price": "¥7,900"
+        }
+      ],
       "imagePosition": "center center"
     },
     {
