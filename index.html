@@ -45,7 +45,7 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .scene--lr{grid-template-columns:58% 1fr;}
 .scene--rl{grid-template-columns:1fr 58%;}
 .scene__photo{overflow:hidden;position:relative;background:#e8e5e0;}
-.scene__photo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .9s ease;background:#e8e5e0;}
+.scene__photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .9s ease;}
 .scene:hover .scene__photo img{transform:scale(1.025);}
 .scene__body{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,7vw,6rem) clamp(2rem,5vw,4.5rem);background:var(--white);}
 .scene__where{font-size:.58rem;letter-spacing:.4em;color:var(--faint);margin-bottom:.6rem;}
@@ -86,7 +86,7 @@ body{font-family:var(--sans);font-weight:300;background:var(--bg);color:var(--in
 .strip{overflow:hidden;padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg);}
 .strip__track{display:flex;gap:.7rem;width:max-content;animation:drift 30s linear infinite;}
 @keyframes drift{to{transform:translateX(-50%);}}
-.strip__track img{height:clamp(160px,20vw,250px);width:auto;max-width:clamp(160px,20vw,250px);object-fit:contain;flex-shrink:0;opacity:.9;background:#e8e5e0;}
+.strip__track img{height:clamp(160px,20vw,250px);width:auto;object-fit:cover;flex-shrink:0;opacity:.9;}
 
 /* CLOSING */
 .closing{padding:clamp(7rem,14vw,13rem) clamp(1.8rem,7vw,5.5rem);max-width:460px;}
@@ -124,9 +124,12 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
   min-height:400px;
 }
 .modal__main-img{
-  width:100%;height:360px;
-  object-fit:contain;object-position:center;
-  display:block;background:#e8e5e0;
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  background:#e8e5e0;
 }
 .modal__thumbs{
   display:flex;gap:.4rem;
@@ -136,11 +139,12 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 }
 .modal__thumb{
   width:56px;height:56px;
-  object-fit:contain;object-position:center;
+  object-fit:cover;object-position:center;
   cursor:pointer;background:#e8e5e0;
   border:1.5px solid transparent;
   transition:border-color .2s;
   flex-shrink:0;
+  aspect-ratio:1;
 }
 .modal__thumb.active,.modal__thumb:hover{border-color:var(--accent);}
 .modal__info{
@@ -771,8 +775,9 @@ function startBar(barId){const bar=document.getElementById(barId);if(!bar)return
 function finishBar(barId,iv){clearInterval(iv);const bar=document.getElementById(barId);if(bar)bar.style.width='100%';}
 
 async function handleImageFile(file,domKey){
-  // 画像ファイルならまずクロッパーを開く
-  if(file.type.startsWith('image/')){
+  // extra画像（詳細・ポップアップ用）のみ正方形クロップ
+  const isExtra=domKey.startsWith('extra-');
+  if(isExtra && file.type.startsWith('image/')){
     openCropper(file,(croppedBlob)=>{
       const croppedFile=new File([croppedBlob],file.name,{type:'image/jpeg'});
       _doUpload(croppedFile,domKey);
@@ -910,9 +915,21 @@ function buildProductField(p, i){
         <input type="text" id="pja-${i}" value="${p.ja}" oninput="document.getElementById('pcard-title-${i}').textContent=this.value||'新しい商品'">
       </div>
       <div class="field"><label>商品名（英語）</label><input type="text" id="pen-${i}" value="${p.en}"></div>
-      <div class="field"><label>価格</label><input type="text" id="ppr-${i}" value="${p.price}"></div>
-      <div class="field"><label>価格 補足</label><input type="text" id="ppn-${i}" value="${p.priceNote}"></div>
+      <div class="field"><label>価格（サイズ別がある場合は下のテーブルを使用）</label><input type="text" id="ppr-${i}" value="${p.price||''}"></div>
       ${(p.specs||[]).map((s,j)=>`<div class="field"><label>仕様 ${j+1}（${s[0]}）</label><input type="text" id="psp-${i}-${j}" value="${s[1]}"></div>`).join('')}
+      <div class="field">
+        <label>サイズ別料金</label>
+        <table class="sp-table" id="spt-${i}">
+          <tr><th>サイズ・仕様名</th><th>料金</th><th></th></tr>
+          ${(p.sizePrices||[]).map((sp,j)=>`
+          <tr id="sp-row-${i}-${j}">
+            <td><input type="text" id="spsize-${i}-${j}" value="${sp.size}" placeholder="例: S"></td>
+            <td><input type="text" id="spprice-${i}-${j}" value="${sp.price}" placeholder="例: ¥6,600"></td>
+            <td><button class="sp-del-btn" onclick="delSpRow(${i},${j})">×</button></td>
+          </tr>`).join('')}
+        </table>
+        <button class="sp-add-btn" onclick="addSpRow(${i})">＋ 行を追加</button>
+      </div>
       <div class="field"><label>レイアウト</label>
         <select id="pside-${i}" style="width:100%;padding:.6rem .8rem;border:1px solid var(--faint);background:var(--bg);font-family:var(--sans);font-size:.75rem;color:var(--ink);border-radius:2px;">
           <option value="lr" ${p.side==='lr'?'selected':''}>写真 左・テキスト 右</option>
