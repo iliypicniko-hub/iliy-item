@@ -699,8 +699,8 @@ function render(){
 ═══════════════════════════════ */
 function openModal(idx){
   const p = D.products[idx];
-  // メイン画像 — imageがあればそれ、なければimagesの1枚目
-  const allImgs = [p.image, ...(p.images||[])].filter(s=>s);
+  // 詳細画像のみ（トップのシーン写真は除外）
+  const allImgs = (p.images||[]).filter(s=>s);
   const mainSrc = allImgs[0] || '';
 
   document.getElementById('modal-main').src = mainSrc;
