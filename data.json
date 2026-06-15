@@ -29,22 +29,27 @@
       "specs": [
         [
           "素材",
-          "シナベニヤ（仮）"
+          ""
         ],
         [
           "サイズ",
-          "〇〇 × 〇〇 cm（仮）"
+          ""
         ],
         [
           "設置",
           "壁掛け・スティックスタンド"
         ]
       ],
-      "price": "¥8,000",
+      "price": "¥9,200~",
       "priceNote": "税込 / 仮価格",
       "image": "https://raw.githubusercontent.com/iliypicniko-hub/iliy-item/main/images/product0_1781484614195.jpg",
       "side": "lr",
-      "sizePrices": [],
+      "sizePrices": [
+        {
+          "size": "スクエア",
+          "price": "¥9,200"
+        }
+      ],
       "imagePosition": "center center"
     },
     {
