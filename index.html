@@ -165,6 +165,7 @@ footer p{font-size:.58rem;letter-spacing:.25em;color:var(--faint);}
 .modal__name{font-weight:300;font-size:1.3rem;letter-spacing:.12em;margin-bottom:1.2rem;}
 .modal__copy{font-size:.75rem;letter-spacing:.09em;line-height:2.6;color:#696460;margin-bottom:2rem;}
 .modal__specs{border-top:1px solid var(--faint);padding-top:1.2rem;margin-bottom:1.8rem;}
+.modal__specs:empty{display:none;border:none;padding:0;margin:0;}
 .modal__spec-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid #ebe8e3;font-size:.7rem;letter-spacing:.06em;}
 .modal__spec-row:last-child{border-bottom:none;}
 .modal__spec-row dt{color:var(--mid);}
@@ -733,7 +734,7 @@ function openModal(idx){
     <h2 class="modal__name">${p.ja}</h2>
     <p class="modal__copy">${nl2br(p.copy)}</p>
     <dl class="modal__specs">
-      ${(p.specs||[]).map(s=>`<div class="modal__spec-row"><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}
+      ${(p.specs||[]).filter(s=>s[1]&&s[1].trim()).map(s=>`<div class="modal__spec-row"><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}
     </dl>
     ${spHtml}`;
 
