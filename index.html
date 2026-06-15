@@ -1124,26 +1124,60 @@ function collectFormValues(){
 }
 
 async function saveToGitHub(){
+  // 最新のフォーム値をDに反映してから保存
   collectFormValues();
+
   const{user,repo,branch,token}=getGhConfig();
-  if(!user||!repo||!token){document.getElementById('gh-setup').style.display='block';setMsg('⚠ GitHub設定を入力してください',true);return;}
+  if(!user||!repo||!token){
+    document.getElementById('gh-setup').style.display='block';
+    setMsg('⚠ GitHub設定を入力してください',true);
+    return;
+  }
   const btn=document.getElementById('gh-save-btn');
   btn.textContent='保存中…';btn.disabled=true;setMsg('');
+
   const path='data.json';
   const apiBase=`https://api.github.com/repos/${user}/${repo}/contents/${path}`;
   const headers={'Authorization':`Bearer ${token}`,'Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
+
   try{
+    // 現在のSHAを取得（上書き保存に必要）
     let sha=null;
-    const getRes=await fetch(`${apiBase}?ref=${branch}`,{headers});
-    if(getRes.ok){const ex=await getRes.json();sha=ex.sha;}
+    try{
+      const getRes=await fetch(`${apiBase}?ref=${branch}`,{headers});
+      if(getRes.ok){
+        const ex=await getRes.json();
+        sha=ex.sha||null;
+      }
+    }catch(e){ /* SHAが取れなくても続行（新規作成） */ }
+
+    // DをJSONに変換してBase64エンコード
     const json=JSON.stringify(D,null,2);
     const b64=btoa(unescape(encodeURIComponent(json)));
-    const body={message:'update: product data',content:b64,branch,...(sha?{sha}:{})};
+    const body={message:'update: product data',content:b64,branch};
+    if(sha) body.sha=sha;
+
     const putRes=await fetch(apiBase,{method:'PUT',headers,body:JSON.stringify(body)});
-    if(putRes.ok){setMsg('✓ GitHubに保存しました');render();setTimeout(closePanel,800);}
-    else{const err=await putRes.json();setMsg('エラー: '+(err.message||putRes.status),true);}
-  }catch(e){setMsg('通信エラー: '+e.message,true);}
-  finally{btn.textContent='GitHubに保存';btn.disabled=false;}
+    if(putRes.ok){
+      // 保存成功 — Dはすでに最新なのでrender()だけ呼ぶ（init()は呼ばない）
+      render();
+      setMsg('✓ GitHubに保存しました');
+      setTimeout(closePanel,900);
+    } else {
+      let errMsg='';
+      try{ const err=await putRes.json(); errMsg=err.message||''; }catch(e){}
+      if(putRes.status===409){
+        setMsg('⚠ 競合エラー: もう一度「GitHubに保存」を押してください',true);
+      } else {
+        setMsg('エラー: '+(errMsg||putRes.status),true);
+      }
+    }
+  }catch(e){
+    setMsg('通信エラー: '+e.message,true);
+  }finally{
+    btn.textContent='GitHubに保存';
+    btn.disabled=false;
+  }
 }
 
 /* ═══════════════════════════════
